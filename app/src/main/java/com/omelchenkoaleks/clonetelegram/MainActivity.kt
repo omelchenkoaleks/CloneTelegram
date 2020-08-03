@@ -3,6 +3,7 @@ package com.omelchenkoaleks.clonetelegram
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -82,11 +83,6 @@ class MainActivity : AppCompatActivity() {
                     .withName("Настройки")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_settings),
-                PrimaryDrawerItem().withIdentifier(107)
-                    .withIconTintingEnabled(true)
-                    .withName("Создать группу")
-                    .withSelectable(false)
-                    .withIcon(R.drawable.ic_menu_create_groups),
                 DividerDrawerItem(),
                 PrimaryDrawerItem().withIdentifier(108)
                     .withIconTintingEnabled(true)
@@ -104,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
+                    Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
                     return false
                 }
             }).build()
