@@ -2,6 +2,7 @@ package com.omelchenkoaleks.clonetelegram
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -10,6 +11,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -96,7 +98,15 @@ class MainActivity : AppCompatActivity() {
                     .withName("Вопросы о Телеграм")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_help)
-            ).build()
+            ).withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener{
+                override fun onItemClick(
+                    view: View?,
+                    position: Int,
+                    drawerItem: IDrawerItem<*>
+                ): Boolean {
+                    return false
+                }
+            }).build()
     }
 
     private fun createHeader() {
