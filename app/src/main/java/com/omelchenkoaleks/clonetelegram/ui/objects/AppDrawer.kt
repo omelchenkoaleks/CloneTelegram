@@ -108,8 +108,8 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
             .withActivity(mainActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName("Александр Омельченко")
-                    .withEmail("omelchenkoaleks@gmail.com")
+                ProfileDrawerItem().withName(mainActivity.getString(R.string.settings_default_username))
+                    .withEmail(mainActivity.getString(R.string.default_email))
             ).build()
     }
 
