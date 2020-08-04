@@ -15,6 +15,7 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.ui.ChatsFragment
+import com.omelchenkoaleks.clonetelegram.ui.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,37 +52,37 @@ class MainActivity : AppCompatActivity() {
             .withSelectedItem(-1)
             .withAccountHeader(mHeader)
             .addDrawerItems(
-                PrimaryDrawerItem().withIdentifier(100)
+                PrimaryDrawerItem().withIdentifier(101)
                     .withIconTintingEnabled(true)
                     .withName("Создать группу")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_create_groups),
-                PrimaryDrawerItem().withIdentifier(101)
+                PrimaryDrawerItem().withIdentifier(102)
                     .withIconTintingEnabled(true)
                     .withName("Создать секретный чат")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_secret_chat),
-                PrimaryDrawerItem().withIdentifier(102)
+                PrimaryDrawerItem().withIdentifier(103)
                     .withIconTintingEnabled(true)
                     .withName("Создать канал")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_create_channel),
-                PrimaryDrawerItem().withIdentifier(103)
+                PrimaryDrawerItem().withIdentifier(104)
                     .withIconTintingEnabled(true)
                     .withName("Контакты")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_contacts),
-                PrimaryDrawerItem().withIdentifier(104)
+                PrimaryDrawerItem().withIdentifier(105)
                     .withIconTintingEnabled(true)
                     .withName("Звонки")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_phone),
-                PrimaryDrawerItem().withIdentifier(105)
+                PrimaryDrawerItem().withIdentifier(106)
                     .withIconTintingEnabled(true)
                     .withName("Избранное")
                     .withSelectable(false)
                     .withIcon(R.drawable.ic_menu_favorites),
-                PrimaryDrawerItem().withIdentifier(106)
+                PrimaryDrawerItem().withIdentifier(107)
                     .withIconTintingEnabled(true)
                     .withName("Настройки")
                     .withSelectable(false)
@@ -103,7 +104,11 @@ class MainActivity : AppCompatActivity() {
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                    when (position) {
+                        7 -> supportFragmentManager.beginTransaction()
+                            .addToBackStack(null) // метод, нужен чтобы вернуться назад при нажатии на кнопку по стеку
+                            .replace(R.id.data_container, SettingsFragment()).commit()
+                    }
                     return false
                 }
             }).build()
