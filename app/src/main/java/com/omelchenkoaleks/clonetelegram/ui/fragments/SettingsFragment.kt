@@ -11,7 +11,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
      */
     override fun onResume() {
         super.onResume()
-
+        setHasOptionsMenu(true) // включает меню в контекте
     }
 
     // Добавляем меную в фрагмент.
