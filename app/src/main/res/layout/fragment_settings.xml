@@ -20,9 +20,7 @@
             android:layout_width="@dimen/settings_user_photo_width"
             android:layout_height="@dimen/settings_user_photo_height"
             android:layout_marginStart="@dimen/horizontal_margin"
-            android:background="@color/colorAccent"
-            android:src="@drawable/ic_default_photo"
-            app:civ_border_width="@dimen/settings_user_photo_border"
+            android:src="@drawable/default_photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
