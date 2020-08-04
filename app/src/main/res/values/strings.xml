@@ -4,4 +4,11 @@
     <string name="settings_default_username">Александр Омельченко</string>
     <string name="default_email">omelchenkoaleks@gmail.com</string>
     <string name="settings_default_status">в сети</string>
+    <string name="settings_text_account">Аккаунт</string>
+    <string name="settings_default_number">+380975179671</string>
+    <string name="settings_label_phone_number">Нажмите, чтобы изменить номер телефона</string>
+    <string name="settings_default_login">omelchenkoaleks</string>
+    <string name="settings_label_login">Имя пользователя</string>
+    <string name="settings_default_bio">О себе</string>
+    <string name="settings_label_bio">Напишите немного о себе</string>
 </resources>
