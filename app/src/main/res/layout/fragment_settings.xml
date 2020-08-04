@@ -66,6 +66,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_button_change_number_phone"
         style="@style/settingsButtons"
+        android:background="@drawable/ripple_effect"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_text_account">
@@ -85,16 +88,19 @@
             app:layout_constraintTop_toBottomOf="@+id/settings_phone_number" />
 
         <View
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_phone_number"
             style="@style/separator"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_phone_number" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_button_change_login"
         style="@style/settingsButtons"
+        android:background="@drawable/ripple_effect"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_button_change_number_phone">
@@ -114,16 +120,19 @@
             app:layout_constraintTop_toBottomOf="@+id/settings_login" />
 
         <View
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_login"
             style="@style/separator"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_login" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_button_change_bio"
         style="@style/settingsButtons"
+        android:background="@drawable/ripple_effect"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_button_change_login">
@@ -143,10 +152,10 @@
             app:layout_constraintTop_toBottomOf="@+id/settings_bio" />
 
         <View
-            app:layout_constraintTop_toBottomOf="@+id/settings_label_bio"
             style="@style/separator"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/settings_label_bio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,11 +163,11 @@
         android:id="@+id/settings_change_photo"
         android:layout_width="@dimen/settings_button_change_photo_width"
         android:layout_height="@dimen/settings_button_change_photo_height"
-        android:src="@drawable/camera"
-        app:civ_circle_background_color="@color/colorAccent"
-        app:civ_border_color="@color/colorGrey"
         android:layout_marginEnd="@dimen/horizontal_margin"
+        android:src="@drawable/camera"
+        app:civ_border_color="@color/colorGrey"
         app:civ_border_width="@dimen/settings_image_border"
+        app:civ_circle_background_color="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/settings_header_block"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_header_block" />
