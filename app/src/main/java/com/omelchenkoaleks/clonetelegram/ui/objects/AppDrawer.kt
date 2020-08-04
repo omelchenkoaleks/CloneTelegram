@@ -12,7 +12,7 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.ui.SettingsFragment
+import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
 
 /*
     В параметрах класса нужно получить привязки - это ведь пока просто класс, и он
@@ -94,7 +94,9 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
                     when (position) {
                         7 -> mainActivity.supportFragmentManager.beginTransaction()
                             .addToBackStack(null) // метод, нужен чтобы вернуться назад при нажатии на кнопку по стеку
-                            .replace(R.id.data_container, SettingsFragment()).commit()
+                            .replace(R.id.data_container,
+                                SettingsFragment()
+                            ).commit()
                     }
                     return false
                 }
