@@ -10,4 +10,7 @@
     <!--  Settings Fragment  -->
     <dimen name="settings_user_photo_width">55dp</dimen>
     <dimen name="settings_user_photo_height">55dp</dimen>
+    <dimen name="settings_button_change_photo_width">45dp</dimen>
+    <dimen name="settings_button_change_photo_height">45dp</dimen>
+    <dimen name="settings_image_border">2dp</dimen>
 </resources>

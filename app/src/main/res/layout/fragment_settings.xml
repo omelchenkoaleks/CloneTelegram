@@ -150,4 +150,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_change_photo"
+        android:layout_width="@dimen/settings_button_change_photo_width"
+        android:layout_height="@dimen/settings_button_change_photo_height"
+        android:src="@drawable/camera"
+        app:civ_circle_background_color="@color/colorAccent"
+        app:civ_border_color="@color/colorGrey"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        app:civ_border_width="@dimen/settings_image_border"
+        app:layout_constraintBottom_toBottomOf="@+id/settings_header_block"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_header_block" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
