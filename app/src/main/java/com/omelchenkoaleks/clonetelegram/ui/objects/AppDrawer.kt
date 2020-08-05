@@ -14,18 +14,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
 
-/*
-    В параметрах класса нужно получить привязки - это ведь пока просто класс, и он
-    ни к чему не привязан. Значит ему надо дать ссылки к чему ему нужно привязаться.
-    Нам при создании этого объекта нужно привязаться к нужной Активити и Toolbar.
- */
 class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
 
-    /*
-        Функция будет доступна в Активити, и она будет создавать Header and Drawer.
-     */
     fun create() {
         createHeader()
         createDrawer()
@@ -93,7 +85,7 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
                 ): Boolean {
                     when (position) {
                         7 -> mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null) // метод, нужен чтобы вернуться назад при нажатии на кнопку по стеку
+                            .addToBackStack(null)
                             .replace(R.id.data_container,
                                 SettingsFragment()
                             ).commit()

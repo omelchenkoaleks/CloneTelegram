@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.data_container,
                     ChatsFragment()
                 ).commit()
-        } else { // если не авторизован, то на регистрацию
+        } else {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }

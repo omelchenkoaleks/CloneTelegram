@@ -7,9 +7,6 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityRegisterBinding
 import com.omelchenkoaleks.clonetelegram.ui.fragments.EnterPhoneNumberFragment
 
-/*
-    Задача этой Activity произвести авторизацию или зарегистрировать нового пользогвателя.
- */
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityRegisterBinding
