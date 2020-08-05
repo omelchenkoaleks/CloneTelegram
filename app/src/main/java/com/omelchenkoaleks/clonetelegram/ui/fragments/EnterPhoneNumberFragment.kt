@@ -2,6 +2,7 @@ package com.omelchenkoaleks.clonetelegram.ui.fragments
 
 import android.widget.Toast
 import com.omelchenkoaleks.clonetelegram.R
+import com.omelchenkoaleks.clonetelegram.replaceFragment
 import com.omelchenkoaleks.clonetelegram.showToast
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 
@@ -16,10 +17,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
         if (register_input_phone_number_edit_text.text.toString().isEmpty()) {
             showToast(getString(R.string.register_toast_enter_phone))
         } else {
-            fragmentManager?.beginTransaction()
-                ?.replace(R.id.register_data_container, EnterCodeFragment())
-                ?.addToBackStack(null)
-                ?.commit()
+            replaceFragment(EnterCodeFragment())
         }
     }
 

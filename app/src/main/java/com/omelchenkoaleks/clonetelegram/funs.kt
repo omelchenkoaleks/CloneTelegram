@@ -23,3 +23,12 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment) {
             fragment
         ).commit()
 }
+
+fun Fragment.replaceFragment(fragment: Fragment) {
+    this.fragmentManager?.beginTransaction()
+        ?.addToBackStack(null)
+        ?.replace(
+            R.id.data_container,
+            fragment
+        )?.commit()
+}
