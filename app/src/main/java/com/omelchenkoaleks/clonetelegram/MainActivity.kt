@@ -1,8 +1,7 @@
 package com.omelchenkoaleks.clonetelegram
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
@@ -32,12 +31,12 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
             supportFragmentManager.beginTransaction()
-                .replace(R.id.data_container,
+                .replace(
+                    R.id.data_container,
                     ChatsFragment()
                 ).commit()
         } else {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            replaceActivity(RegisterActivity())
         }
     }
 
