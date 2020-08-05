@@ -1,7 +1,7 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
-import android.widget.Toast
 import com.omelchenkoaleks.clonetelegram.R
+import com.omelchenkoaleks.clonetelegram.showToast
 import com.omelchenkoaleks.clonetelegram.utils.AppTextWatcher
 import kotlinx.android.synthetic.main.fragment_enter_code.*
 
@@ -18,7 +18,7 @@ class EnterCodeFragment : BaseFragment(R.layout.fragment_enter_code) {
     }
 
     private fun verificationCode() {
-        Toast.makeText(activity, "OK", Toast.LENGTH_SHORT).show()
+        showToast("OK")
     }
 
 }
