@@ -30,11 +30,7 @@ class MainActivity : AppCompatActivity() {
         if (false) { // Если авторизован, то заходим
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            supportFragmentManager.beginTransaction()
-                .replace(
-                    R.id.data_container,
-                    ChatsFragment()
-                ).commit()
+            replaceFragment(ChatsFragment())
         } else {
             replaceActivity(RegisterActivity())
         }
