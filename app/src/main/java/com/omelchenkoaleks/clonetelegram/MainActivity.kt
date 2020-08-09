@@ -3,10 +3,12 @@ package com.omelchenkoaleks.clonetelegram
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.auth.FirebaseAuth
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
+import com.omelchenkoaleks.clonetelegram.utils.AUTH
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunctionality() {
-        if (false) { // Если авторизован, то заходим
+        if (AUTH.currentUser != null) { // Если авторизован, то заходим
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
             replaceFragment(ChatsFragment())
@@ -39,5 +41,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
+        AUTH = FirebaseAuth.getInstance()
     }
 }
