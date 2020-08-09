@@ -46,6 +46,7 @@
     <EditText
         android:id="@+id/register_inter_code_edit_text"
         style="@style/edit_text"
+        android:layout_width="wrap_content"
         android:gravity="center"
         android:hint="@string/register_hint_default_code"
         android:maxLength="6"
