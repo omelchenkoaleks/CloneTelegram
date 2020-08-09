@@ -9,6 +9,7 @@ import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
+import com.omelchenkoaleks.clonetelegram.utils.initFirebase
 import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
@@ -43,6 +44,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
-        AUTH = FirebaseAuth.getInstance()
+        initFirebase()
     }
 }
