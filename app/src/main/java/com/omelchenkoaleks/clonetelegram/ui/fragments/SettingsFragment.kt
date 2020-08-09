@@ -6,7 +6,7 @@ import android.view.MenuItem
 import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
-import com.omelchenkoaleks.clonetelegram.replaceActivity
+import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {

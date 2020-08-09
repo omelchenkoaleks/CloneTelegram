@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityRegisterBinding
-import com.omelchenkoaleks.clonetelegram.replaceFragment
+import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 import com.omelchenkoaleks.clonetelegram.ui.fragments.EnterPhoneNumberFragment
 
 class RegisterActivity : AppCompatActivity() {
@@ -24,6 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = mBinding.registerToolbar
         setSupportActionBar(mToolbar)
         title = getString(R.string.register_title_your_phone)
-        replaceFragment(EnterPhoneNumberFragment())
+        replaceFragment(EnterPhoneNumberFragment(), false)
     }
 }

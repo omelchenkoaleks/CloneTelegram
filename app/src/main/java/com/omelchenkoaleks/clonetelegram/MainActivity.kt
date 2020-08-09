@@ -9,6 +9,8 @@ import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
+import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
+import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         if (AUTH.currentUser != null) { // Если авторизован, то заходим
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment())
+            replaceFragment(ChatsFragment(), false)
         } else {
             replaceActivity(RegisterActivity())
         }
