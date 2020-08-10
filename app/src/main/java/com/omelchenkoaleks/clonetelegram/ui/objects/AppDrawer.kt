@@ -3,6 +3,7 @@ package com.omelchenkoaleks.clonetelegram.ui.objects
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -18,10 +19,36 @@ import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
 class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
+    private lateinit var mDrawerLayout: DrawerLayout
 
     fun create() {
         createHeader()
         createDrawer()
+        mDrawerLayout = mDrawer.drawerLayout
+    }
+
+    // Отключает Drawer.
+    fun disableDrawer() {
+        mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false // Отключаем "гамбургер"
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true) // Включаем кнопку "назад"
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) // Блокируем Drawer.
+
+        // переопределяем клик на кнопку "назад".
+        toolbar.setNavigationOnClickListener {
+            mainActivity.supportFragmentManager.popBackStack() // Неважно какой фрагмент - мы просто вернемся по стеку назад.
+        }
+    }
+
+    // Включает Drawer.
+    fun enableDrawer() {
+        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false) // Отключаем сначала кнопку "назад"
+        mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true // Включаем "гамбургер"
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED) // Разблокируем Drawer.
+
+        // При включенном Drawer - нажатие на кнопку должно открывать Drawer.
+        toolbar.setNavigationOnClickListener {
+            mDrawer.openDrawer()
+        }
     }
 
     private fun createDrawer() {

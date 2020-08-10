@@ -1,11 +1,25 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
 import androidx.fragment.app.Fragment
+import com.omelchenkoaleks.clonetelegram.MainActivity
 
 open class BaseFragment(private val layout: Int) : Fragment(layout) {
 
     override fun onStart() {
         super.onStart()
+        /*
+            Как только у нас запускается любой фрагмент, который наследуется от базового фрагмента =
+            будет запущет этот код с методом отключения Drawer.
+         */
+        (activity as MainActivity).mAppDrawer.disableDrawer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        /*
+            Сработает перед закрытием фрагмента. Когда будет нажата кнопка "назад".
+         */
+        (activity as MainActivity).mAppDrawer.enableDrawer()
     }
 
 }
