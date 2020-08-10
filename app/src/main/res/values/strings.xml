@@ -22,4 +22,6 @@
     <string name="register_phone_hint">------------</string>
     <string name="settings_hint_input_name">Имя</string>
     <string name="settings_hint_input_surname">Фамилия</string>
+    <string name="settings_toast_name_isEmpty">Имя не может быть пустым</string>
+    <string name="toast_data_update">Данные обновлены</string>
 </resources>
