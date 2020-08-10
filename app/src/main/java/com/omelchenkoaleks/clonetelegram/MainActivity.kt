@@ -4,14 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
+import com.omelchenkoaleks.clonetelegram.models.User
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
-import com.omelchenkoaleks.clonetelegram.utils.AUTH
-import com.omelchenkoaleks.clonetelegram.utils.initFirebase
-import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
-import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
+import com.omelchenkoaleks.clonetelegram.utils.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,5 +46,19 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
         initFirebase()
+        initUser()
+    }
+
+    private fun initUser() {
+        /*
+            addListenerForSingleValueEvent
+            Слушатель, который подключится к базе, скачает нужные данные и закроется.
+            Вешаем слушателя, который один раз подключится, а не будет слушать изменения постоянно.
+         */
+        REF_DATABASE_ROOT.child(NODE_USERS).child(UID)
+            .addListenerForSingleValueEvent(AppValueEventListener {
+                // getValue - метод (Firebase) в данном случае принимает весь класс полностью
+                USER = it.getValue(User::class.java) ?: User() // Если вдруг чего-то нет (null) - мы просто инициализируем пустым User()
+            })
     }
 }
