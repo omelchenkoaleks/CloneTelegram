@@ -8,6 +8,7 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
+import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
@@ -29,6 +30,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                  */
                 (activity as MainActivity).replaceActivity(RegisterActivity())
             }
+            R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
     }
