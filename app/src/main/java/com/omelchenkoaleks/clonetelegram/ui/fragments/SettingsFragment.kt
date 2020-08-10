@@ -8,13 +8,25 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
+import com.omelchenkoaleks.clonetelegram.utils.USER
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
     override fun onResume() {
         super.onResume()
         setHasOptionsMenu(true) // включает меню в контекте
+        initFields()
+    }
+
+    // Очень удобно, когда данные уже находятся в модельке. )))
+    private fun initFields() {
+        settings_bio.text = USER.bio
+        settings_full_name.text = USER.fullName
+        settings_phone_number.text = USER.phone
+        settings_status.text = USER.status
+        settings_username.text = USER.username
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
