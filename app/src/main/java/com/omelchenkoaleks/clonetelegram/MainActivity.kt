@@ -3,10 +3,6 @@ package com.omelchenkoaleks.clonetelegram
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.models.User

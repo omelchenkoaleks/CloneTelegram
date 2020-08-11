@@ -15,8 +15,13 @@ class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
         setHasOptionsMenu(true)
         // Делим на две строки по пробелу. Заполняем поля: имя и фамилия.
         val fullNameList = USER.fullName.split(" ")
-        settings_input_name.setText(fullNameList[0])
-        settings_input_surname.setText(fullNameList[1])
+        // Нужно обязательно проветить какая длина массива - т.к. может не быть двух элементов.
+        if (fullNameList.size > 1) {
+            settings_input_name.setText(fullNameList[0])
+            settings_input_surname.setText(fullNameList[1])
+        } else {
+            settings_input_name.setText(fullNameList[0])
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
