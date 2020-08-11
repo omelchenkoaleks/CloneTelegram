@@ -38,7 +38,18 @@ class ChangeUsernameFragment : BaseFragment(R.layout.fragment_change_username) {
         if (mNewUsername.isEmpty()) {
             showToast("Поле пустое")
         } else {
-            changeUsername()
+            /*
+                Сначала нужно проверить hasChild() - есть ли уже в базе данных
+                 такой пользователь (такой username)?!
+             */
+            REF_DATABASE_ROOT.child(NODE_USERNAMES)
+                .addListenerForSingleValueEvent(AppValueEventListener {
+                    if (it.hasChild(mNewUsername)) {
+                        showToast("Такой пользователь уже существует")
+                    } else {
+                        changeUsername()
+                    }
+                })
         }
     }
 
