@@ -79,10 +79,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {
                                         // Устанавливаем нашу картинку в приложение.
-                                        Picasso.get()
-                                            .load(photoUrl)
-                                            .placeholder(R.drawable.default_photo)
-                                            .into(settings_user_photo)
+                                        settings_user_photo.downloadAndSetImage(photoUrl)
                                         showToast(getString(R.string.toast_data_update))
                                         USER.photoUrl = photoUrl
                                     }
