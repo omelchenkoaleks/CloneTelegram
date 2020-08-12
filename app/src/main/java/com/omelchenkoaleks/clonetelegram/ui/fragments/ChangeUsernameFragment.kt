@@ -11,7 +11,6 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     override fun onResume() {
         super.onResume()
-        setHasOptionsMenu(true)
         // Подгружаем тот username что есть на данный момент.
         settings_input_username.setText(USER.username)
     }

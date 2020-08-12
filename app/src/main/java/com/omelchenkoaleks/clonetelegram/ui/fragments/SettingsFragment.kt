@@ -29,6 +29,8 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
 
         // Активируем кнопку для перехода на изменение username.
         settings_button_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
+        // Активируем кнопку для перехода на изменение bio.
+        settings_button_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

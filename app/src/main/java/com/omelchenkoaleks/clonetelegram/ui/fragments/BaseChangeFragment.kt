@@ -12,6 +12,7 @@ open class BaseChangeFragment(layout: Int) : Fragment(layout) {
     override fun onStart() {
         super.onStart()
         setHasOptionsMenu(true)
+        (activity as MainActivity).mAppDrawer.disableDrawer()
     }
 
     override fun onStop() {
