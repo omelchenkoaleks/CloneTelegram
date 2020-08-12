@@ -34,7 +34,7 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
         } else {
             val fullName = "$name $surname"
             // Добавляем в базу данных.
-            REF_DATABASE_ROOT.child(NODE_USERS).child(UID).child(CHILD_FULL_NAME)
+            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULL_NAME)
                 .setValue(fullName).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast(getString(R.string.toast_data_update))

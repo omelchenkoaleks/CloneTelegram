@@ -1,15 +1,13 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
-import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
-import com.omelchenkoaleks.clonetelegram.utils.AUTH
-import com.omelchenkoaleks.clonetelegram.utils.USER
-import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
+import com.omelchenkoaleks.clonetelegram.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -34,15 +32,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         // Активируем кнопку для перехода на изменение bio.
         settings_button_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         // Активируем кнопку для перехода на изменение photo.
-        settings_user_photo.setOnClickListener { changePhotoUser() }
+        settings_change_photo.setOnClickListener { changePhotoUser() }
     }
 
     private fun changePhotoUser() {
         CropImage.activity()
-            .setAspectRatio(1,1)
+            .setAspectRatio(1, 1)
             .setRequestedSize(600, 600)
             .setCropShape(CropImageView.CropShape.OVAL)
-            .start((activity as MainActivity))
+            .start(APP_ACTIVITY)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -56,7 +54,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 /*
                     Теперь нужно обязательно запустить снова окно авторизации:
                  */
-                (activity as MainActivity).replaceActivity(RegisterActivity())
+                APP_ACTIVITY.replaceActivity(RegisterActivity())
             }
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }

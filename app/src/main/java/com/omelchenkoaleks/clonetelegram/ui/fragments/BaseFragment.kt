@@ -1,7 +1,7 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
 import androidx.fragment.app.Fragment
-import com.omelchenkoaleks.clonetelegram.MainActivity
+import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 
 open class BaseFragment(layout: Int) : Fragment(layout) {
 
@@ -12,7 +12,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             будет запущет этот код с методом отключения Drawer.
          */
         // TODO: Разобраться с багами = java.lang.ClassCastException
-        (activity as MainActivity).mAppDrawer.disableDrawer()
+        APP_ACTIVITY.mAppDrawer.disableDrawer()
     }
 
     override fun onStop() {
@@ -20,7 +20,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
         /*
             Сработает перед закрытием фрагмента. Когда будет нажата кнопка "назад".
          */
-        (activity as MainActivity).mAppDrawer.enableDrawer()
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 
 }
