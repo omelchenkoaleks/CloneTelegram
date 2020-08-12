@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
+import com.omelchenkoaleks.clonetelegram.utils.hideKeyboard
 
 open class BaseChangeFragment(layout: Int) : Fragment(layout) {
 
@@ -17,7 +18,7 @@ open class BaseChangeFragment(layout: Int) : Fragment(layout) {
 
     override fun onStop() {
         super.onStop()
-        APP_ACTIVITY.hideKeyboard() // Скрываем клавиатуру при переходе на следующий фрагмент.
+        hideKeyboard() // Скрываем клавиатуру при переходе на следующий фрагмент.
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
