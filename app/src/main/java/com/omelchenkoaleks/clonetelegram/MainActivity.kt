@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        /*
+            Как только запускается MainActivity мы присвоиваем ссылку на это активити константе.
+            Теперь в любых частях этого приложения можно будет получить ссылку на это активити.
+            И не нужно будет делать приведение типа (activity as MainActivity)!
+         */
+        APP_ACTIVITY = this
         initFields()
         initFunctionality()
     }
