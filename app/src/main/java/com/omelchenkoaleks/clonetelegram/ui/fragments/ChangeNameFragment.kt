@@ -8,7 +8,10 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
 
     override fun onResume() {
         super.onResume()
+        initFullNameList()
+    }
 
+    private fun initFullNameList() {
         // Делим на две строки по пробелу. Заполняем поля: имя и фамилия.
         val fullNameList = USER.fullName.split(" ")
 
