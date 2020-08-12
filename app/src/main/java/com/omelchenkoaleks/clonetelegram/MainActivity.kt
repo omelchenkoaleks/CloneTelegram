@@ -88,19 +88,28 @@ class MainActivity : AppCompatActivity() {
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
             // Передаем туда полученный uri и вешаем слушатель.
-            path.putFile(uri).addOnCompleteListener {
-                if (it.isSuccessful) {
+            path.putFile(uri).addOnCompleteListener { task1 ->
+                if (task1.isSuccessful) {
                     // Получить само изображение можно как callback метода downloadUrl.
-                    path.downloadUrl.addOnCompleteListener {
-                        if (it.isSuccessful) {
+                    path.downloadUrl.addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful) {
                             /*
                                 В переменной photoUrl и есть то значение (адрес в Интернете) по
                                 которому мы можем обратиться к нашей картинке.
                              */
-                            val photoUrl = it.result.toString()
+                            val photoUrl = task2.result.toString()
+
+                            // Сохраняем url в базе данных и в пользователе.
+                            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
+                                .child(CHILD_PHOTO_URL).setValue(photoUrl)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        showToast(getString(R.string.toast_data_update))
+                                        USER.photoUrl = photoUrl
+                                    }
+                                }
                         }
                     }
-//                    showToast(getString(R.string.toast_data_update))
                 }
             }
         }
@@ -108,7 +117,8 @@ class MainActivity : AppCompatActivity() {
 
     // Скрывает клавиатуру в любом месте приложения.
     fun hideKeyboard() {
-        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm: InputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)
     }
 
