@@ -25,10 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-    }
 
-    override fun onStart() {
-        super.onStart()
         /*
             Как только запускается MainActivity мы присвоиваем ссылку на это активити константе.
             Теперь в любых частях этого приложения можно будет получить ссылку на это активити.
