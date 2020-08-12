@@ -14,11 +14,11 @@ open class BaseChangeFragment(layout: Int) : Fragment(layout) {
         super.onStart()
         setHasOptionsMenu(true)
         APP_ACTIVITY.mAppDrawer.disableDrawer()
+        hideKeyboard() // Скрываем клавиатуру при переходе на следующий фрагмент.
     }
 
     override fun onStop() {
         super.onStop()
-        hideKeyboard() // Скрываем клавиатуру при переходе на следующий фрагмент.
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
