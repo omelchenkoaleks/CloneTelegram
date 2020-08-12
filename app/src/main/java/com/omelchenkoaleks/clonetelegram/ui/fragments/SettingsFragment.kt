@@ -1,7 +1,5 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
