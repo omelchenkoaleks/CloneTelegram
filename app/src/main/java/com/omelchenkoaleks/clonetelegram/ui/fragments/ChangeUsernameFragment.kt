@@ -1,15 +1,11 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*
 
-class ChangeUsernameFragment : BaseFragment(R.layout.fragment_change_username) {
+class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_username) {
 
     lateinit var mNewUsername: String
 
@@ -20,18 +16,7 @@ class ChangeUsernameFragment : BaseFragment(R.layout.fragment_change_username) {
         settings_input_username.setText(USER.username)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.settings_confirm_change -> change()
-        }
-        return true
-    }
-
-    private fun change() {
+    override fun change() {
         mNewUsername = settings_input_username.text.toString().toLowerCase(Locale.getDefault())
         if (mNewUsername.isEmpty()) {
             showToast("Поле пустое")
@@ -69,7 +54,7 @@ class ChangeUsernameFragment : BaseFragment(R.layout.fragment_change_username) {
                     showToast(getString(R.string.toast_data_update))
                     deleteOldUsername()
                 } else {
-                    showToast(it.exception?.message.toString()  )
+                    showToast(it.exception?.message.toString())
                 }
             }
     }
@@ -82,7 +67,7 @@ class ChangeUsernameFragment : BaseFragment(R.layout.fragment_change_username) {
                     fragmentManager?.popBackStack() // возвращаемся назад по стеку
                     USER.username = mNewUsername
                 } else {
-                    showToast(it.exception?.message.toString()  )
+                    showToast(it.exception?.message.toString())
                 }
             }
     }

@@ -1,20 +1,17 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 
-class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
+class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
 
     override fun onResume() {
         super.onResume()
-        setHasOptionsMenu(true)
+
         // Делим на две строки по пробелу. Заполняем поля: имя и фамилия.
         val fullNameList = USER.fullName.split(" ")
+
         // Нужно обязательно проветить какая длина массива - т.к. может не быть двух элементов.
         if (fullNameList.size > 1) {
             settings_input_name.setText(fullNameList[0])
@@ -24,18 +21,7 @@ class ChangeNameFragment : BaseFragment(R.layout.fragment_change_name) {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        (activity as MainActivity).menuInflater.inflate(R.menu.settings_menu_confirm, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.settings_confirm_change -> changeName()
-        }
-        return true
-    }
-
-    private fun changeName() {
+    override fun change() {
         // Сначала при нажатии на кнопку мы должны считать данные.
         val name = settings_input_name.text.toString()
         val surname = settings_input_surname.text.toString()

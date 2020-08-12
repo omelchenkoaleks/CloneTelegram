@@ -12,7 +12,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             будет запущет этот код с методом отключения Drawer.
          */
         // TODO: Разобраться с багами = java.lang.ClassCastException
-//        (activity as MainActivity).mAppDrawer.disableDrawer()
+        (activity as MainActivity).mAppDrawer.disableDrawer()
     }
 
     override fun onStop() {
@@ -20,7 +20,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
         /*
             Сработает перед закрытием фрагмента. Когда будет нажата кнопка "назад".
          */
-//        (activity as MainActivity).mAppDrawer.enableDrawer()
+        (activity as MainActivity).mAppDrawer.enableDrawer()
     }
 
 }
