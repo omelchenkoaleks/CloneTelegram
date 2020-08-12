@@ -90,7 +90,17 @@ class MainActivity : AppCompatActivity() {
             // Передаем туда полученный uri и вешаем слушатель.
             path.putFile(uri).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    showToast(getString(R.string.toast_data_update))
+                    // Получить само изображение можно как callback метода downloadUrl.
+                    path.downloadUrl.addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            /*
+                                В переменной photoUrl и есть то значение (адрес в Интернете) по
+                                которому мы можем обратиться к нашей картинке.
+                             */
+                            val photoUrl = it.result.toString()
+                        }
+                    }
+//                    showToast(getString(R.string.toast_data_update))
                 }
             }
         }
