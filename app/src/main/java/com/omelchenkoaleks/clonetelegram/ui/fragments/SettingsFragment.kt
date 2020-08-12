@@ -10,6 +10,8 @@ import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
 import com.omelchenkoaleks.clonetelegram.utils.AUTH
 import com.omelchenkoaleks.clonetelegram.utils.USER
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
@@ -31,6 +33,16 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_button_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         // Активируем кнопку для перехода на изменение bio.
         settings_button_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
+        // Активируем кнопку для перехода на изменение photo.
+        settings_user_photo.setOnClickListener { changePhotoUser() }
+    }
+
+    private fun changePhotoUser() {
+        CropImage.activity()
+            .setAspectRatio(1,1)
+            .setRequestedSize(600, 600)
+            .setCropShape(CropImageView.CropShape.OVAL)
+            .start((activity as MainActivity))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
