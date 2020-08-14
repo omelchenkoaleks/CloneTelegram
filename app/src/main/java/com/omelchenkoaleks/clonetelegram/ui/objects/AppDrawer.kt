@@ -138,5 +138,12 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
             ).build()
     }
 
+    fun updateHeader() {
+        mCurrentProfile
+            .withName(USER.fullName)
+            .withEmail(USER.phone)
+            .withIcon(USER.photoUrl)
+        mHeader.updateProfile(mCurrentProfile)
+    }
 
 }
