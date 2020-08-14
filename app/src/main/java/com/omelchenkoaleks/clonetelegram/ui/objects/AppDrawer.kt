@@ -13,13 +13,15 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
+import com.omelchenkoaleks.clonetelegram.utils.USER
+import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
 class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar: Toolbar) {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mCurrentProfile: ProfileDrawerItem
 
     fun create() {
         createHeader()
@@ -120,12 +122,19 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
     }
 
     private fun createHeader() {
+
+        // Инициализируем текущего пользователя.
+        mCurrentProfile = ProfileDrawerItem()
+            .withName(USER.fullName)
+            .withEmail(USER.phone)
+            .withIcon(USER.photoUrl)
+            .withIdentifier(200)
+
         mHeader = AccountHeaderBuilder()
             .withActivity(mainActivity)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
-                ProfileDrawerItem().withName(mainActivity.getString(R.string.settings_default_username))
-                    .withEmail(mainActivity.getString(R.string.default_email))
+                mCurrentProfile
             ).build()
     }
 
