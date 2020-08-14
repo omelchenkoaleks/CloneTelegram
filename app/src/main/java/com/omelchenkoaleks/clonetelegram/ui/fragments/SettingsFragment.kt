@@ -26,13 +26,13 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_phone_number.text = USER.phone
         settings_status.text = USER.status
         settings_username.text = USER.username
-
         // Активируем кнопку для перехода на изменение username.
         settings_button_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         // Активируем кнопку для перехода на изменение bio.
         settings_button_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         // Активируем кнопку для перехода на изменение photo.
         settings_change_photo.setOnClickListener { changePhotoUser() }
+        settings_user_photo.downloadAndSetImage(USER.photoUrl)
     }
 
     private fun changePhotoUser() {
