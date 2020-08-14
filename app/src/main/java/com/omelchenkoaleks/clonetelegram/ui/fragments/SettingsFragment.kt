@@ -8,7 +8,6 @@ import android.view.MenuItem
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.utils.*
-import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -53,44 +52,21 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK
             && data != null
         ) {
-            /*
-                И вот теперь нужно получить uri на нашу картинку, который покажет нам путь
-                к нашему обрезанному изображению.
-             */
             val uri = CropImage.getActivityResult(data).uri
-            // Путь создаем.
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
-            // Передаем туда полученный uri и вешаем слушатель.
-            path.putFile(uri).addOnCompleteListener { task1 ->
-                if (task1.isSuccessful) {
-                    // Получить само изображение можно как callback метода downloadUrl.
-                    path.downloadUrl.addOnCompleteListener { task2 ->
-                        if (task2.isSuccessful) {
-                            /*
-                                В переменной photoUrl и есть то значение (адрес в Интернете) по
-                                которому мы можем обратиться к нашей картинке.
-                             */
-                            val photoUrl = task2.result.toString()
 
-                            // Сохраняем url в базе данных и в пользователе.
-                            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-                                .child(CHILD_PHOTO_URL).setValue(photoUrl)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        // Устанавливаем нашу картинку в приложение.
-                                        settings_user_photo.downloadAndSetImage(photoUrl)
-                                        showToast(getString(R.string.toast_data_update))
-                                        USER.photoUrl = photoUrl
-                                    }
-                                }
-                        }
+            putImageToStorage(uri, path) {
+                getUrlFromStorage(path) {
+                    putUrlToDatabase(it) {
+                        settings_user_photo.downloadAndSetImage(it)
+                        showToast(getString(R.string.toast_data_update))
+                        USER.photoUrl = it
                     }
                 }
             }
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.settings_action_menu, menu)

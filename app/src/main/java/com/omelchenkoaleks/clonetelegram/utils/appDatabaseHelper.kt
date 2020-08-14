@@ -1,5 +1,6 @@
 package com.omelchenkoaleks.clonetelegram.utils
 
+import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -36,6 +37,26 @@ fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
     USER = User()
-    CURRENT_UID = AUTH.currentUser?.uid.toString() // Получаем уникальный идентификационный номер нашего пользгователя.
+    CURRENT_UID =
+        AUTH.currentUser?.uid.toString() // Получаем уникальный идентификационный номер нашего пользгователя.
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference // Получаем ссылку на Storage.
+}
+
+fun putUrlToDatabase(url: String, function: () -> Unit) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
+        .child(CHILD_PHOTO_URL).setValue(url)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun getUrlFromStorage(path: StorageReference, function: (url: String) -> Unit) {
+    path.downloadUrl
+        .addOnSuccessListener { function(it.toString()) }
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun putImageToStorage(uri: Uri, path: StorageReference, function: () -> Unit) {
+    path.putFile(uri)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
 }
