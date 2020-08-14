@@ -27,8 +27,12 @@ class MainActivity : AppCompatActivity() {
             И не нужно будет делать приведение типа (activity as MainActivity)!
          */
         APP_ACTIVITY = this
-        initFields()
-        initFunctionality()
+        initFirebase() // Сначала должны проинициализироваться все наши переменные, доступные во всем приложении.
+        initUser { // Потом нашего пользователя. Но нужно дождаться его инициализации с текущей базы данных, прежде чем пойдет дальше.
+            // Эти функции начнут выполняться только после инициализации нашего пользователя.
+            initFields()
+            initFunctionality()
+        }
     }
 
     private fun initFunctionality() {
@@ -44,21 +48,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
-        initFirebase()
-        initUser()
     }
 
-    private fun initUser() {
-        /*
-            addListenerForSingleValueEvent
-            Слушатель, который подключится к базе, скачает нужные данные и закроется.
-            Вешаем слушателя, который один раз подключится, а не будет слушать изменения постоянно.
-         */
-        REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-            .addListenerForSingleValueEvent(AppValueEventListener {
-                // getValue - метод (Firebase) в данном случае принимает весь класс полностью
-                USER = it.getValue(User::class.java)
-                    ?: User() // Если вдруг чего-то нет (null) - мы просто инициализируем пустым User()
-            })
-    }
 }

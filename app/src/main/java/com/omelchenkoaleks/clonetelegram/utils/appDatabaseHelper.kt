@@ -60,3 +60,22 @@ inline fun putImageToStorage(uri: Uri, path: StorageReference, crossinline funct
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
+
+inline fun initUser(crossinline function: () -> Unit) {
+    /*
+        addListenerForSingleValueEvent
+        Слушатель, который подключится к базе, скачает нужные данные и закроется.
+        Вешаем слушателя, который один раз подключится, а не будет слушать изменения постоянно.
+     */
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
+        .addListenerForSingleValueEvent(AppValueEventListener {
+            // getValue - метод (Firebase) в данном случае принимает весь класс полностью
+            USER = it.getValue(User::class.java)
+                ?: User() // Если вдруг чего-то нет (null) - мы просто инициализируем пустым User()
+            if (USER.username.isEmpty()) {
+                USER.username = CURRENT_UID
+            }
+            function()
+        })
+}
+
