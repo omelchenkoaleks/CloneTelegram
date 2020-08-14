@@ -40,6 +40,7 @@ class ChangeNameFragment : BaseChangeFragment(R.layout.fragment_change_name) {
                         showToast(getString(R.string.toast_data_update))
                         // Теперь нужно юзера обновить.
                         USER.fullName = fullName
+                        APP_ACTIVITY.mAppDrawer.updateHeader() // Обновить после изменения.
                         fragmentManager?.popBackStack() // Переходим по стеку назад.
                     }
                 }
