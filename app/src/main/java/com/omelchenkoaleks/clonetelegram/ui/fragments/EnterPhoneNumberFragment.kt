@@ -1,6 +1,5 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments
 
-import androidx.fragment.app.Fragment
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider

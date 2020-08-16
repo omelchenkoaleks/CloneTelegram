@@ -1,8 +1,10 @@
 package com.omelchenkoaleks.clonetelegram
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
 import com.omelchenkoaleks.clonetelegram.models.User
@@ -30,8 +32,15 @@ class MainActivity : AppCompatActivity() {
         initFirebase() // Сначала должны проинициализироваться все наши переменные, доступные во всем приложении.
         initUser { // Потом нашего пользователя. Но нужно дождаться его инициализации с текущей базы данных, прежде чем пойдет дальше.
             // Эти функции начнут выполняться только после инициализации нашего пользователя.
+            initContacts()
             initFields()
             initFunctionality()
+        }
+    }
+
+    private fun initContacts() {
+        if (checkPermission(READ_CONTACTS)) {
+            showToast("Чтение контактов")
         }
     }
 
@@ -60,6 +69,17 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         // Когда сворачивем приложение - передаем в базу данных наше состояние OFFLINE
         AppStates.updateState(AppStates.OFFLINE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (ContextCompat.checkSelfPermission(APP_ACTIVITY, READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            initContacts()
+        }
     }
 
 }
