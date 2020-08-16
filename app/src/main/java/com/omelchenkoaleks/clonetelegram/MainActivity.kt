@@ -11,6 +11,10 @@ import com.omelchenkoaleks.clonetelegram.models.User
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +36,10 @@ class MainActivity : AppCompatActivity() {
         initFirebase() // Сначала должны проинициализироваться все наши переменные, доступные во всем приложении.
         initUser { // Потом нашего пользователя. Но нужно дождаться его инициализации с текущей базы данных, прежде чем пойдет дальше.
             // Эти функции начнут выполняться только после инициализации нашего пользователя.
-            initContacts()
+            CoroutineScope(Dispatchers.IO).launch {
+                initContacts()
+            }
+
             initFields()
             initFunctionality()
         }
@@ -40,7 +47,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initContacts() {
         if (checkPermission(READ_CONTACTS)) {
-            showToast("Чтение контактов")
+                val array = arrayOfNulls<Int>(5000)
+                array.forEach { println(it) }
         }
     }
 
