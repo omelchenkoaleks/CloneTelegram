@@ -24,7 +24,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_bio.text = USER.bio
         settings_full_name.text = USER.fullName
         settings_phone_number.text = USER.phone
-        settings_status.text = USER.status
+        settings_status.text = USER.state
         settings_username.text = USER.username
         // Активируем кнопку для перехода на изменение username.
         settings_button_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }

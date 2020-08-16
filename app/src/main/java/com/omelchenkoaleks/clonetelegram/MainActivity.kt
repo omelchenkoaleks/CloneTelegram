@@ -50,4 +50,16 @@ class MainActivity : AppCompatActivity() {
         mAppDrawer = AppDrawer(this, mToolbar)
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Когда разворачиваем приложение - передаем в базу данных наше состояние ONLINE
+        AppStates.updateState(AppStates.ONLINE)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // Когда сворачивем приложение - передаем в базу данных наше состояние OFFLINE
+        AppStates.updateState(AppStates.OFFLINE)
+    }
+
 }
