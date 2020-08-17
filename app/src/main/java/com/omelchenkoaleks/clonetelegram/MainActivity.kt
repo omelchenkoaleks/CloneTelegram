@@ -2,18 +2,17 @@ package com.omelchenkoaleks.clonetelegram
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
-import com.omelchenkoaleks.clonetelegram.models.User
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ChatsFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -38,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             // Эти функции начнут выполняться только после инициализации нашего пользователя.
             CoroutineScope(Dispatchers.IO).launch {
                 initContacts()
+                Log.d("TAG", "I'm in scope")
             }
 
             initFields()

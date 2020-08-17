@@ -27,15 +27,10 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
      */
     private fun enterCode() {
         val code = register_inter_code_edit_text.text.toString()
-        // Получаем объект с помощью которого можно получить авторизацию или создать нового пользователя.
         val credential = PhoneAuthProvider.getCredential(id, code)
-        AUTH.signInWithCredential(credential).addOnCompleteListener { it ->
-            if (it.isSuccessful) {
-
+        AUTH.signInWithCredential(credential).addOnCompleteListener { authResult ->
+            if (authResult.isSuccessful) {
                 val uid = AUTH.currentUser?.uid.toString()
-                /*
-                    Будем записывать в эту коллекцию данные и передавать ее в базу данных.
-                 */
                 val dateMap = mutableMapOf<String, Any>()
                 dateMap[CHILD_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
@@ -47,18 +42,15 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
                     .addOnSuccessListener {
                         // Передаем теперь данные в базу данных.
                         REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                            .addOnCompleteListener {task ->
-                                if (task.isSuccessful) {
-                                    showToast("Добро пожаловать")
-                                    (activity as RegisterActivity).replaceActivity(MainActivity())
-                                } else {
-                                    showToast(task.exception?.message.toString())
-                                }
+                            .addOnCompleteListener {
+                                showToast("Добро пожаловать")
+                                (activity as RegisterActivity).replaceActivity(MainActivity())
                             }
+                            .addOnFailureListener { showToast(it.message.toString()) }
                     }
 
             } else {
-                showToast(it.exception?.message.toString())
+                showToast(authResult.exception?.message.toString())
             }
         }
     }

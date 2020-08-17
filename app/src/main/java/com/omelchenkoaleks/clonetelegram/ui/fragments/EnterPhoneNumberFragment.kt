@@ -6,10 +6,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
-import com.omelchenkoaleks.clonetelegram.utils.AUTH
-import com.omelchenkoaleks.clonetelegram.utils.replaceActivity
-import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
-import com.omelchenkoaleks.clonetelegram.utils.showToast
+import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
 
