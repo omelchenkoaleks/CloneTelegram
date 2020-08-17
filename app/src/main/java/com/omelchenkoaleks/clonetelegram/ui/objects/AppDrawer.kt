@@ -18,7 +18,9 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.omelchenkoaleks.clonetelegram.R
+import com.omelchenkoaleks.clonetelegram.ui.fragments.ContactsFragment
 import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
+import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.utils.USER
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
@@ -120,12 +122,17 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    when (position) {
-                        7 -> mainActivity.replaceFragment(SettingsFragment())
-                    }
+                    clickToItem(position)
                     return false
                 }
             }).build()
+    }
+
+    private fun clickToItem(position: Int) {
+        when (position) {
+            7 -> APP_ACTIVITY.replaceFragment(SettingsFragment())
+            4 -> APP_ACTIVITY.replaceFragment(ContactsFragment())
+        }
     }
 
     private fun createHeader() {
