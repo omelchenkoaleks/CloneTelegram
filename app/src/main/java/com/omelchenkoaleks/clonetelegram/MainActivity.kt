@@ -45,13 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initContacts() {
-        if (checkPermission(READ_CONTACTS)) {
-                val array = arrayOfNulls<Int>(5000)
-                array.forEach { println(it) }
-        }
-    }
-
     private fun initFunctionality() {
         if (AUTH.currentUser != null) { // Если авторизован, то заходим
             setSupportActionBar(mToolbar)

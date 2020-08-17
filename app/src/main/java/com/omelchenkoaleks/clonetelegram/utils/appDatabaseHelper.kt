@@ -1,11 +1,13 @@
 package com.omelchenkoaleks.clonetelegram.utils
 
 import android.net.Uri
+import android.provider.ContactsContract
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.models.User
 
 /*
@@ -80,3 +82,32 @@ inline fun initUser(crossinline function: () -> Unit) {
         })
 }
 
+fun initContacts() {
+    if (checkPermission(READ_CONTACTS)) {
+        val arrayContacts = arrayListOf<CommonModel>()
+
+        // Сама по себе телефонная книга на смартфоне - это база данных. Поэтому нам нужен объект cursor.
+        val cursor = APP_ACTIVITY.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            null,
+            null,
+            null
+        )
+
+        cursor?.let {
+            while (it.moveToNext()) {
+                val fullName =
+                    it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                val phone =
+                    it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val newModel = CommonModel()
+                newModel.fullName = fullName
+                newModel.phone = phone
+                arrayContacts.add(newModel)
+            }
+        }
+
+        cursor?.close()
+    }
+}
