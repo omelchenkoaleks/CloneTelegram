@@ -24,6 +24,7 @@ lateinit var USER: User
 
 const val NODE_USERS = "users"
 const val NODE_USERNAMES = "usernames"
+const val NODE_PHONES = "phones"
 
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 

@@ -21,6 +21,10 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
         })
     }
 
+    /*
+        Функция проверяет код, если все хорошо,
+        то записывает информацию о пользователе в базе данных.
+     */
     private fun enterCode() {
         val code = register_inter_code_edit_text.text.toString()
         // Получаем объект с помощью которого можно получить авторизацию или создать нового пользователя.
@@ -37,16 +41,22 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
                 dateMap[CHILD_PHONE] = phoneNumber
                 dateMap[CHILD_USERNAME] = uid
 
-                // Передаем теперь данные в базу данных.
-                REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                    .addOnCompleteListener {task ->
-                        if (task.isSuccessful) {
-                            showToast("Добро пожаловать")
-                            (activity as RegisterActivity).replaceActivity(MainActivity())
-                        } else {
-                            showToast(task.exception?.message.toString())
-                        }
+                // Содаем NODE (узел в базе данных) для телефонов и их id.
+                REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
+                    .addOnFailureListener { showToast(it.message.toString()) }
+                    .addOnSuccessListener {
+                        // Передаем теперь данные в базу данных.
+                        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
+                            .addOnCompleteListener {task ->
+                                if (task.isSuccessful) {
+                                    showToast("Добро пожаловать")
+                                    (activity as RegisterActivity).replaceActivity(MainActivity())
+                                } else {
+                                    showToast(task.exception?.message.toString())
+                                }
+                            }
                     }
+
             } else {
                 showToast(it.exception?.message.toString())
             }
