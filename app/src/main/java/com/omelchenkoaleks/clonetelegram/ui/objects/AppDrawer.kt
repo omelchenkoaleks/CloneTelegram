@@ -25,7 +25,7 @@ import com.omelchenkoaleks.clonetelegram.utils.USER
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
-class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar: Toolbar) {
+class AppDrawer {
     private lateinit var mDrawer: Drawer
     private lateinit var mHeader: AccountHeader
     private lateinit var mDrawerLayout: DrawerLayout
@@ -41,31 +41,31 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
     // Отключает Drawer.
     fun disableDrawer() {
         mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = false // Отключаем "гамбургер"
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true) // Включаем кнопку "назад"
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(true) // Включаем кнопку "назад"
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) // Блокируем Drawer.
 
         // переопределяем клик на кнопку "назад".
-        toolbar.setNavigationOnClickListener {
-            mainActivity.supportFragmentManager.popBackStack() // Неважно какой фрагмент - мы просто вернемся по стеку назад.
+        APP_ACTIVITY.mToolbar.setNavigationOnClickListener {
+            APP_ACTIVITY.supportFragmentManager.popBackStack() // Неважно какой фрагмент - мы просто вернемся по стеку назад.
         }
     }
 
     // Включает Drawer.
     fun enableDrawer() {
-        mainActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false) // Отключаем сначала кнопку "назад"
+        APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(false) // Отключаем сначала кнопку "назад"
         mDrawer.actionBarDrawerToggle?.isDrawerIndicatorEnabled = true // Включаем "гамбургер"
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED) // Разблокируем Drawer.
 
         // При включенном Drawer - нажатие на кнопку должно открывать Drawer.
-        toolbar.setNavigationOnClickListener {
+        APP_ACTIVITY.mToolbar.setNavigationOnClickListener {
             mDrawer.openDrawer()
         }
     }
 
     private fun createDrawer() {
         mDrawer = DrawerBuilder()
-            .withActivity(mainActivity)
-            .withToolbar(toolbar)
+            .withActivity(APP_ACTIVITY)
+            .withToolbar(APP_ACTIVITY.mToolbar)
             .withActionBarDrawerToggle(true)
             .withSelectedItem(-1)
             .withAccountHeader(mHeader)
@@ -145,7 +145,7 @@ class AppDrawer(private val mainActivity: AppCompatActivity, private val toolbar
             .withIdentifier(200)
 
         mHeader = AccountHeaderBuilder()
-            .withActivity(mainActivity)
+            .withActivity(APP_ACTIVITY)
             .withHeaderBackground(R.drawable.header)
             .addProfiles(
                 mCurrentProfile
