@@ -22,6 +22,14 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     private lateinit var mRefContacts: DatabaseReference // ссылка откуда мы будем скачивать наши данные
     private lateinit var mRefUsers: DatabaseReference // ссылка на users в базе данных (что можно было по id получить данные)
 
+
+    // ЧТОБЫ НЕ БЫЛО УТЕЧКИ ПАМЯТИ:
+    private lateinit var mRefUsersListener: AppValueEventListener
+
+    // Для того, чтобы закрыть все слушатели, нужно собрать их и потом в массиве их все закрыть.
+    private var mapListeners = hashMapOf<DatabaseReference, AppValueEventListener>()
+
+
     override fun onResume() {
         super.onResume()
         APP_ACTIVITY.title = "Контакты"
@@ -48,13 +56,18 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 position: Int,
                 model: CommonModel
             ) {
-                mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(model.id) // получаем ссылку на юзера
-                mRefUsers.addValueEventListener(AppValueEventListener {
+                mRefUsers =
+                    REF_DATABASE_ROOT.child(NODE_USERS).child(model.id) // получаем ссылку на юзера
+
+                mRefUsersListener = AppValueEventListener {
                     val contact = it.getCommonModel() // создали и получили контакт
                     holder.name.text = contact.fullName
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
-                })
+                }
+
+                mRefUsers.addValueEventListener(mRefUsersListener)
+                mapListeners[mRefUsers] = mRefUsersListener
             }
         }
 
@@ -72,6 +85,9 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     override fun onPause() {
         super.onPause()
         mAdapter.stopListening()
+        mapListeners.forEach() {
+            it.key.removeEventListener(it.value)
+        }
     }
 
 }
