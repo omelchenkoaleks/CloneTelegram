@@ -20,6 +20,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: FirebaseRecyclerAdapter<CommonModel, ContactsHolder>
     private lateinit var mRefContacts: DatabaseReference // ссылка откуда мы будем скачивать наши данные
+    private lateinit var mRefUsers: DatabaseReference // ссылка на users в базе данных (что можно было по id получить данные)
 
     override fun onResume() {
         super.onResume()
@@ -47,9 +48,13 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 position: Int,
                 model: CommonModel
             ) {
-                holder.name.text = model.fullName
-                holder.status.text = model.state
-                holder.photo.downloadAndSetImage(model.photoUrl)
+                mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(model.id) // получаем ссылку на юзера
+                mRefUsers.addValueEventListener(AppValueEventListener {
+                    val contact = it.getCommonModel() // создали и получили контакт
+                    holder.name.text = contact.fullName
+                    holder.status.text = contact.state
+                    holder.photo.downloadAndSetImage(contact.photoUrl)
+                })
             }
         }
 
