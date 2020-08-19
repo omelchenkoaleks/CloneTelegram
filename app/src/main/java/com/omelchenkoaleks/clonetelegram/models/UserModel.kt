@@ -5,7 +5,7 @@ package com.omelchenkoaleks.clonetelegram.models
     свойства. Чтобы не было необходимости при каждом случае обращаться к базе данных. А данные
     хранились уже в User.
  */
-data class User(
+data class UserModel(
     val id: String = "",
     var username: String = "",
     var bio: String = "",

@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
-import com.omelchenkoaleks.clonetelegram.models.User
+import com.omelchenkoaleks.clonetelegram.models.UserModel
 
 /*
     Эта переменная будет работать на все приложение.
@@ -20,7 +20,7 @@ lateinit var AUTH: FirebaseAuth
 lateinit var CURRENT_UID: String // Уникальный номер нашего пользователя.
 lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var REF_STORAGE_ROOT: StorageReference
-lateinit var USER: User
+lateinit var USER: UserModel
 
 
 const val NODE_USERS = "users"
@@ -42,7 +42,7 @@ const val CHILD_STATE = "state"
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-    USER = User()
+    USER = UserModel()
     CURRENT_UID =
         AUTH.currentUser?.uid.toString() // Получаем уникальный идентификационный номер нашего пользгователя.
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference // Получаем ссылку на Storage.
@@ -76,8 +76,8 @@ inline fun initUser(crossinline function: () -> Unit) {
     REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
         .addListenerForSingleValueEvent(AppValueEventListener {
             // getValue - метод (Firebase) в данном случае принимает весь класс полностью
-            USER = it.getValue(User::class.java)
-                ?: User() // Если вдруг чего-то нет (null) - мы просто инициализируем пустым User()
+            USER = it.getValue(UserModel::class.java)
+                ?: UserModel() // Если вдруг чего-то нет (null) - мы просто инициализируем пустым User()
             if (USER.username.isEmpty()) {
                 USER.username = CURRENT_UID
             }
@@ -133,4 +133,8 @@ fun updatePhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
 
 fun DataSnapshot.getCommonModel(): CommonModel =
     this.getValue(CommonModel::class.java) ?: CommonModel()
+
+fun DataSnapshot.getUserModel(): UserModel =
+    this.getValue(UserModel::class.java) ?: UserModel()
+
 
