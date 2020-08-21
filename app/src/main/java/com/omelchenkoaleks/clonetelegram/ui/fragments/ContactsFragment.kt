@@ -57,14 +57,19 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                 model: CommonModel
             ) {
                 mRefUsers =
-                    REF_DATABASE_ROOT.child(NODE_USERS).child(model.id) // получаем ссылку на юзера
+                    REF_DATABASE_ROOT.child(NODE_USERS).child(model.id) // Получаем ссылку на юзера.
 
                 mRefUsersListener = AppValueEventListener {
-                    val contact = it.getCommonModel() // создали и получили контакт
-                    holder.name.text = contact.fullName
+                    val contact = it.getCommonModel() // Создали и получили контакт.
+
+                    // Чтобы fullName не был пустым, если пользователь его не устанавливал сам.
+                    if (contact.fullName.isEmpty()) {
+                        holder.name.text = model.fullName
+                    } else holder.name.text = contact.fullName
+
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
-                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(contact)) }
+                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
                 }
 
                 mRefUsers.addValueEventListener(mRefUsersListener)
