@@ -24,31 +24,22 @@ fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
     this.finish()
 }
 
-fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = true) {
+fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     // Меняем фрагмент с добавлением его в стек.
     if (addStack) {
-        supportFragmentManager.beginTransaction()
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(
                 R.id.data_container,
                 fragment
             ).commit()
     } else { // Меняем фрагмент без добавления его в стек.
-        supportFragmentManager.beginTransaction()
+        APP_ACTIVITY.supportFragmentManager.beginTransaction()
             .replace(
                 R.id.data_container,
                 fragment
             ).commit()
     }
-}
-
-fun Fragment.replaceFragment(fragment: Fragment) {
-    this.fragmentManager?.beginTransaction()
-        ?.addToBackStack(null)
-        ?.replace(
-            R.id.data_container,
-            fragment
-        )?.commit()
 }
 
 // Скрывает клавиатуру в любом месте приложения.
