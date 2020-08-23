@@ -3,6 +3,7 @@ package com.omelchenkoaleks.clonetelegram.ui.fragments
 import androidx.fragment.app.Fragment
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
+import com.omelchenkoaleks.clonetelegram.utils.hideKeyboard
 
 /*
     Главный экран приложения.
@@ -15,5 +16,6 @@ class MainFragment : Fragment(R.layout.fragment_chats) {
         super.onResume()
         APP_ACTIVITY.title = "Telegram"
         APP_ACTIVITY.mAppDrawer.enableDrawer()
+        hideKeyboard()
     }
 }
