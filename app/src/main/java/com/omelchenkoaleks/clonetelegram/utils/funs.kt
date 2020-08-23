@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
@@ -96,3 +97,9 @@ fun initContacts() {
     }
 }
 
+// receive date from timestamp
+fun String.asTime(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
+}
