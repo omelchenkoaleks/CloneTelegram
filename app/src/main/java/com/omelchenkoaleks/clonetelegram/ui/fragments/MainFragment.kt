@@ -9,10 +9,11 @@ import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
     ChatsFragment - т.к. он основной фрагмент, он не наследуется от базового фрагмента. Он должен
     вести свою жизнь и не должен вести точно также, как другие фрагменты.
  */
-class ChatsFragment : Fragment(R.layout.fragment_chats) {
+class MainFragment : Fragment(R.layout.fragment_chats) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Чаты"
+        APP_ACTIVITY.title = "Telegram"
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 }

@@ -1,11 +1,11 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.fragments.register
 
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
-import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
+import com.omelchenkoaleks.clonetelegram.database.AUTH
+import com.omelchenkoaleks.clonetelegram.ui.fragments.BaseFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
@@ -22,7 +22,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
                 AUTH.signInWithCredential(credential).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast("Добро пожаловать")
-                        (activity as RegisterActivity).replaceActivity(MainActivity())
+                        restartActivity()
                     } else {
                         showToast(it.exception?.message.toString())
                     }
@@ -55,7 +55,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
             mPhoneNumber, // Phone number to verify
             60, // Timeout duration
             TimeUnit.SECONDS, // Unit of timeout
-            activity as RegisterActivity, // Activity (for callback binding)
+            APP_ACTIVITY, // Activity (for callback binding)
             mCallback
         ) // OnVerificationStateChangedCallbacks
     }

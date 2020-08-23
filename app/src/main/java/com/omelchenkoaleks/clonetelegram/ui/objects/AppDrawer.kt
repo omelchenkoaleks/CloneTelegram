@@ -4,8 +4,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -21,7 +19,7 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.ui.fragments.ContactsFragment
 import com.omelchenkoaleks.clonetelegram.ui.fragments.SettingsFragment
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
-import com.omelchenkoaleks.clonetelegram.utils.USER
+import com.omelchenkoaleks.clonetelegram.database.USER
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 

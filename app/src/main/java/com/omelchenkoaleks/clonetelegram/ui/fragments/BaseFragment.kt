@@ -11,16 +11,7 @@ open class BaseFragment(layout: Int) : Fragment(layout) {
             Как только у нас запускается любой фрагмент, который наследуется от базового фрагмента =
             будет запущет этот код с методом отключения Drawer.
          */
-        // TODO: Разобраться с багами = java.lang.ClassCastException
         APP_ACTIVITY.mAppDrawer.disableDrawer()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        /*
-            Сработает перед закрытием фрагмента. Когда будет нажата кнопка "назад".
-         */
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 
 }

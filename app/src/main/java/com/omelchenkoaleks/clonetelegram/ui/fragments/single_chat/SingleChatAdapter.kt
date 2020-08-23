@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
-import com.omelchenkoaleks.clonetelegram.utils.CURRENT_UID
+import com.omelchenkoaleks.clonetelegram.database.CURRENT_UID
 import com.omelchenkoaleks.clonetelegram.utils.asTime
 import kotlinx.android.synthetic.main.message_item.view.*
 

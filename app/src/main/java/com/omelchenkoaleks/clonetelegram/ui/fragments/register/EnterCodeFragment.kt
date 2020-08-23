@@ -1,9 +1,9 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.fragments.register
 
 import com.google.firebase.auth.PhoneAuthProvider
-import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
+import com.omelchenkoaleks.clonetelegram.database.*
+import com.omelchenkoaleks.clonetelegram.ui.fragments.BaseFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_code.*
 
@@ -12,7 +12,7 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
 
     override fun onStart() {
         super.onStart()
-        (activity as RegisterActivity).title = phoneNumber
+        APP_ACTIVITY.title = phoneNumber
         register_inter_code_edit_text.addTextChangedListener(AppTextWatcher {
             val code = register_inter_code_edit_text.text.toString()
             if (code.length == 6) {
@@ -44,7 +44,7 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
                         REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
                             .addOnCompleteListener {
                                 showToast("Добро пожаловать")
-                                (activity as RegisterActivity).replaceActivity(MainActivity())
+                                restartActivity()
                             }
                             .addOnFailureListener { showToast(it.message.toString()) }
                     }

@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.activities.RegisterActivity
+import com.omelchenkoaleks.clonetelegram.database.*
 import com.omelchenkoaleks.clonetelegram.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -81,7 +81,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 /*
                     Теперь нужно обязательно запустить снова окно авторизации:
                  */
-                APP_ACTIVITY.replaceActivity(RegisterActivity())
+                restartActivity()
             }
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }

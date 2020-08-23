@@ -6,9 +6,10 @@ import android.provider.ContactsContract
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.omelchenkoaleks.clonetelegram.MainActivity
 import com.omelchenkoaleks.clonetelegram.R
+import com.omelchenkoaleks.clonetelegram.database.updatePhonesToDatabase
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -18,10 +19,11 @@ fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
 }
 
-fun AppCompatActivity.replaceActivity(activity: AppCompatActivity) {
-    val intent = Intent(this, activity::class.java)
-    startActivity(intent)
-    this.finish()
+// Перезапускает нашу одну Активити (одна на все приложение).
+fun restartActivity() {
+    val intent = Intent(APP_ACTIVITY, MainActivity::class.java)
+    APP_ACTIVITY.startActivity(intent)
+    APP_ACTIVITY.finish()
 }
 
 fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
