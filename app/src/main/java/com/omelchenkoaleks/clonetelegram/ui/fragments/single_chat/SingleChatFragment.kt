@@ -27,7 +27,8 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mAdapter: SingleChatAdapter
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mMessagesListener: ChildEventListener // to avoid memory leaks
-    private var mListMessages = mutableListOf<CommonModel>()
+    // Переменная хранит сколько сообщений нужно загрузить.
+    private var mCountMessages = 10
 
     override fun onResume() {
         super.onResume()
@@ -48,7 +49,8 @@ class SingleChatFragment(private val contact: CommonModel) :
                 mRecyclerView.smoothScrollToPosition(mAdapter.itemCount) // Прокрутить адаптер на последний элемент списка.
         }
 
-        mRefMessages.addChildEventListener(mMessagesListener)
+        // Добавляем фильтр = ограничить последними 10 сообщениями.
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
     }
 
     private fun initToolbar() {
