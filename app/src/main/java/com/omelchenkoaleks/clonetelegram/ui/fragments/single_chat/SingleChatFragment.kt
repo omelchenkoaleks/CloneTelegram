@@ -43,29 +43,9 @@ class SingleChatFragment(private val contact: CommonModel) :
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
 
-        mMessagesListener = object : ChildEventListener {
-
-            // work when added element
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                mAdapter.addItem(snapshot.getCommonModel()) // передаем одно сообщение
+        mMessagesListener = AppChildEventListener {
+                mAdapter.addItem(it.getCommonModel()) // передаем одно сообщение
                 mRecyclerView.smoothScrollToPosition(mAdapter.itemCount) // Прокрутить адаптер на последний элемент списка.
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//                TODO("Not yet implemented")
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-//                TODO("Not yet implemented")
-            }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-//                TODO("Not yet implemented")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-            }
         }
 
         mRefMessages.addChildEventListener(mMessagesListener)
