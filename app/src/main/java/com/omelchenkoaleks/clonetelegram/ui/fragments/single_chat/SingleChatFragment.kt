@@ -2,6 +2,7 @@ package com.omelchenkoaleks.clonetelegram.ui.fragments.single_chat
 
 import android.view.View
 import android.widget.AbsListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.database.DatabaseReference
@@ -31,10 +32,12 @@ class SingleChatFragment(private val contact: CommonModel) :
     private var mSmoothScrollToPosition =
         true // Как только мы первый раз получаем данные мы должны опуститься вниз
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var mLayoutManager: LinearLayoutManager
 
     override fun onResume() {
         super.onResume()
         mSwipeRefreshLayout = chat_swipe_refresh
+        mLayoutManager = LinearLayoutManager(this.context)
         initToolbar()
         initRecyclerView()
     }
@@ -47,6 +50,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             .child(CURRENT_UID)
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
+        mRecyclerView.layoutManager = mLayoutManager
 
         mMessagesListener = AppChildEventListener {
             val message = it.getCommonModel()
@@ -75,7 +79,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (mIsScrolling && dy < 0) {
+                if (mIsScrolling && dy < 0 && mLayoutManager.findFirstVisibleItemPosition() <= 3) {
                     updateData()
                 }
             }
