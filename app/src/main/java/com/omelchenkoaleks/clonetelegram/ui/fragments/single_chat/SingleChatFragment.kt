@@ -32,7 +32,6 @@ class SingleChatFragment(private val contact: CommonModel) :
     private var mIsScrolling = false
     private var mSmoothScrollToPosition =
         true // Как только мы первый раз получаем данные мы должны опуститься вниз
-    private var mListListener = mutableListOf<AppChildEventListener>()
 
     override fun onResume() {
         super.onResume()
@@ -58,7 +57,6 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         // Добавляем фильтр = ограничить последними 10 сообщениями.
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
-        mListListener.add(mMessagesListener)
 
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -81,8 +79,8 @@ class SingleChatFragment(private val contact: CommonModel) :
         mSmoothScrollToPosition = false
         mIsScrolling = false
         mCountMessages += 10
+        mRefMessages.removeEventListener(mMessagesListener)
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
-        mListListener.add(mMessagesListener)
     }
 
     private fun initToolbar() {
@@ -122,10 +120,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         super.onPause()
         mToolbarInfo.visibility = View.GONE
         mRefUser.removeEventListener(mListenerInfoToolbar)
-
-        mListListener.forEach {
-            mRefMessages.removeEventListener(it)
-        }
+        mRefMessages.removeEventListener(mMessagesListener)
     }
 
 }
