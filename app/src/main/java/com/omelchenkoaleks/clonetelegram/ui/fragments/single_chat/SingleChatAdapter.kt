@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.message_item.view.*
  */
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
-    private var mListMessagesCache = emptyList<CommonModel>() // returns immutable empty list
+    private var mListMessagesCache = mutableListOf<CommonModel>() // returns immutable empty list
     private lateinit var mDiffResult: DiffUtil.DiffResult
 
     class SingleChatHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -59,20 +59,19 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
 
     override fun getItemCount(): Int = mListMessagesCache.size
 
-    fun setList(list: List<CommonModel>) {
-    }
+    fun addItem(item: CommonModel, toBottom: Boolean) {
+        if (toBottom) {
+            if (!mListMessagesCache.contains(item)) {
+                mListMessagesCache.add(item)
+                notifyItemInserted(mListMessagesCache.size) // просьба вставить последний элемент списка
+            }
+        } else {
+            if (!mListMessagesCache.contains(item)) {
+                mListMessagesCache.add(item)
+                mListMessagesCache.sortBy { it.timeStamp.toString() }
+                notifyItemInserted(0) // просьба вставить последний элемент списка
+            }
 
-    fun addItem(item: CommonModel) {
-        val newList = mutableListOf<CommonModel>()
-        newList.addAll(mListMessagesCache)
-
-        if (!newList.contains(item)) newList.add(item) // проверка, чтобы не было дублирования item
-
-        newList.sortBy { it.timeStamp.toString() } // сортировка по последнему добавленному сообщение по времени
-        mDiffResult = DiffUtil.calculateDiff(DiffUtilCallback(mListMessagesCache, newList))
-        mDiffResult.dispatchUpdatesTo(this)
-        // copy from received list in list for our adapter
-        mListMessagesCache = newList
-
+        }
     }
 }

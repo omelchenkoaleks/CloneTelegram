@@ -50,7 +50,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRecyclerView.adapter = mAdapter
 
         mMessagesListener = AppChildEventListener {
-            mAdapter.addItem(it.getCommonModel()) // передаем одно сообщение
+            mAdapter.addItem(it.getCommonModel(), mSmoothScrollToPosition) // передаем одно сообщение
             if (mSmoothScrollToPosition) {
                 mRecyclerView.smoothScrollToPosition(mAdapter.itemCount) // Прокрутить адаптер на последний элемент списка.
             }
