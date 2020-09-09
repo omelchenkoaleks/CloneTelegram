@@ -1,6 +1,7 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments.single_chat
 
 import android.view.View
+import android.widget.AbsListView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -27,8 +28,10 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mAdapter: SingleChatAdapter
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mMessagesListener: ChildEventListener // to avoid memory leaks
-    // Переменная хранит сколько сообщений нужно загрузить.
-    private var mCountMessages = 10
+    private var mCountMessages = 10 // Переменная хранит сколько сообщений нужно загрузить.
+    private var mIsScrolling = false
+    private var mSmoothScrollToPosition =
+        true // Как только мы первый раз получаем данные мы должны опуститься вниз
 
     override fun onResume() {
         super.onResume()
@@ -39,17 +42,43 @@ class SingleChatFragment(private val contact: CommonModel) :
     private fun initRecyclerView() {
         mRecyclerView = chat_recycler_view
         mAdapter = SingleChatAdapter()
-        mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES)
+        mRefMessages = REF_DATABASE_ROOT
+            .child(NODE_MESSAGES)
             .child(CURRENT_UID)
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
 
         mMessagesListener = AppChildEventListener {
-                mAdapter.addItem(it.getCommonModel()) // передаем одно сообщение
+            mAdapter.addItem(it.getCommonModel()) // передаем одно сообщение
+            if (mSmoothScrollToPosition) {
                 mRecyclerView.smoothScrollToPosition(mAdapter.itemCount) // Прокрутить адаптер на последний элемент списка.
+            }
         }
 
         // Добавляем фильтр = ограничить последними 10 сообщениями.
+        mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
+
+        mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    mIsScrolling = true
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (mIsScrolling && dy < 0) {
+                    updateData()
+                }
+            }
+        })
+    }
+
+    private fun updateData() {
+        mSmoothScrollToPosition = false
+        mIsScrolling = false
+        mCountMessages += 10
         mRefMessages.limitToLast(mCountMessages).addChildEventListener(mMessagesListener)
     }
 
@@ -65,6 +94,7 @@ class SingleChatFragment(private val contact: CommonModel) :
         mRefUser = REF_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
         mRefUser.addValueEventListener(mListenerInfoToolbar)
         chat_btn_send_message.setOnClickListener {
+            mSmoothScrollToPosition = true
             val message = chat_input_message.text.toString()
             if (message.isEmpty()) {
                 showToast("Введите сообщение")
