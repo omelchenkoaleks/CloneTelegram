@@ -27,7 +27,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mAdapter: SingleChatAdapter
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mMessagesListener: AppChildEventListener // to avoid memory leaks
-    private var mCountMessages = 10 // Переменная хранит сколько сообщений нужно загрузить.
+    private var mCountMessages = 15 // Переменная хранит сколько сообщений нужно загрузить.
     private var mIsScrolling = false
     private var mSmoothScrollToPosition =
         true // Как только мы первый раз получаем данные мы должны опуститься вниз
@@ -36,10 +36,14 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     override fun onResume() {
         super.onResume()
-        mSwipeRefreshLayout = chat_swipe_refresh
-        mLayoutManager = LinearLayoutManager(this.context)
+        initFields()
         initToolbar()
         initRecyclerView()
+    }
+
+    private fun initFields() {
+        mSwipeRefreshLayout = chat_swipe_refresh
+        mLayoutManager = LinearLayoutManager(this.context)
     }
 
     private fun initRecyclerView() {
@@ -50,6 +54,9 @@ class SingleChatFragment(private val contact: CommonModel) :
             .child(CURRENT_UID)
             .child(contact.id)
         mRecyclerView.adapter = mAdapter
+        mRecyclerView.setHasFixedSize(true)
+        mRecyclerView.isNestedScrollingEnabled =
+            false // мы его не используем, поэтому просто отключаем
         mRecyclerView.layoutManager = mLayoutManager
 
         mMessagesListener = AppChildEventListener {
