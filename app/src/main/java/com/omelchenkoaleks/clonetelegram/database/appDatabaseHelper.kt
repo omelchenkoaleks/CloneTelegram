@@ -212,6 +212,3 @@ fun sendMessageAsImage(receivingUserId: String, imageUrl: String, messageKey: St
         .updateChildren(mapDialog)
         .addOnFailureListener { showToast(it.message.toString()) }
 }
-
-
-

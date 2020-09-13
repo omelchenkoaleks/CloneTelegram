@@ -15,7 +15,7 @@ data class CommonModel(
     var photoUrl: String = "empty",
     var imageUrl: String = "empty",
     var text: String = "",
-    var type: String= "",
+    var type: String = "",
     var from: String = "",
     var timeStamp: Any = ""
 ) {
