@@ -13,6 +13,7 @@ import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.models.UserModel
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.utils.AppValueEventListener
+import com.omelchenkoaleks.clonetelegram.utils.TYPE_MESSAGE_IMAGE
 import com.omelchenkoaleks.clonetelegram.utils.showToast
 
 /*
@@ -44,6 +45,7 @@ const val CHILD_USERNAME = "username"
 const val CHILD_FULL_NAME = "fullName"
 const val CHILD_BIO = "bio"
 const val CHILD_PHOTO_URL = "photoUrl"
+const val CHILD_IMAGE_URL = "imageUrl"
 const val CHILD_STATE = "state"
 const val CHILD_TEXT = "text"
 const val CHILD_TYPE = "type"
@@ -190,5 +192,26 @@ fun setNameToDatabase(fullName: String) {
             APP_ACTIVITY.supportFragmentManager.popBackStack() // Переходим по стеку назад.
         }.addOnFailureListener { showToast(it.message.toString()) }
 }
+
+fun sendMessageAsImage(receivingUserId: String, imageUrl: String, messageKey: String) {
+    val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserId"
+    val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserId/$CURRENT_UID"
+
+    val mapMessage = hashMapOf<String, Any>()
+    mapMessage[CHILD_FROM] = CURRENT_UID
+    mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
+    mapMessage[CHILD_ID] = messageKey
+    mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
+    mapMessage[CHILD_IMAGE_URL] = imageUrl
+
+    val mapDialog = hashMapOf<String, Any>()
+    mapDialog["$refDialogUser/$messageKey"] = mapMessage
+    mapDialog["$refDialogReceivingUser/$messageKey"] = mapMessage
+
+    REF_DATABASE_ROOT
+        .updateChildren(mapDialog)
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
 
 
