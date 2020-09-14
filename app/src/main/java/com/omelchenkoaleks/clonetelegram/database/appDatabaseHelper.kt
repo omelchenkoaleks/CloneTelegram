@@ -45,7 +45,7 @@ const val CHILD_USERNAME = "username"
 const val CHILD_FULL_NAME = "fullName"
 const val CHILD_BIO = "bio"
 const val CHILD_PHOTO_URL = "photoUrl"
-const val CHILD_IMAGE_URL = "imageUrl"
+const val CHILD_FILE_URL = "fileUrl"
 const val CHILD_STATE = "state"
 const val CHILD_TEXT = "text"
 const val CHILD_TYPE = "type"
@@ -202,7 +202,7 @@ fun sendMessageAsImage(receivingUserId: String, imageUrl: String, messageKey: St
     mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
     mapMessage[CHILD_ID] = messageKey
     mapMessage[CHILD_TIME_STAMP] = ServerValue.TIMESTAMP
-    mapMessage[CHILD_IMAGE_URL] = imageUrl
+    mapMessage[CHILD_FILE_URL] = imageUrl
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -212,3 +212,11 @@ fun sendMessageAsImage(receivingUserId: String, imageUrl: String, messageKey: St
         .updateChildren(mapDialog)
         .addOnFailureListener { showToast(it.message.toString()) }
 }
+
+fun getMessageKey(id: String) = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
+    .child(id).push().key.toString()
+
+fun uploadFileToStorage(uri: Uri, messageKey: String) {
+    showToast("Record OK")
+}
+
