@@ -34,20 +34,28 @@ class EnterCodeFragment(private val phoneNumber: String, private val id: String)
                 val dateMap = mutableMapOf<String, Any>()
                 dateMap[CHILD_ID] = uid
                 dateMap[CHILD_PHONE] = phoneNumber
-                dateMap[CHILD_USERNAME] = uid
 
-                // Содаем NODE (узел в базе данных) для телефонов и их id.
-                REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
-                    .addOnFailureListener { showToast(it.message.toString()) }
-                    .addOnSuccessListener {
-                        // Передаем теперь данные в базу данных.
-                        REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
-                            .addOnCompleteListener {
-                                showToast("Добро пожаловать")
-                                restartActivity()
-                            }
+                REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
+                    .addListenerForSingleValueEvent(AppValueEventListener {
+
+                        if (!it.hasChild(CHILD_USERNAME)) {
+                            dateMap[CHILD_USERNAME] = uid
+                        }
+
+                        // Содаем NODE (узел в базе данных) для телефонов и их id.
+                        REF_DATABASE_ROOT.child(NODE_PHONES).child(phoneNumber).setValue(uid)
                             .addOnFailureListener { showToast(it.message.toString()) }
-                    }
+                            .addOnSuccessListener {
+                                // Передаем теперь данные в базу данных.
+                                REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
+                                    .updateChildren(dateMap)
+                                    .addOnCompleteListener {
+                                        showToast("Добро пожаловать")
+                                        restartActivity()
+                                    }
+                                    .addOnFailureListener { showToast(it.message.toString()) }
+                            }
+                    })
 
             } else {
                 showToast(authResult.exception?.message.toString())
