@@ -2,6 +2,7 @@ package com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.vie
 
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.utils.TYPE_MESSAGE_IMAGE
+import com.omelchenkoaleks.clonetelegram.utils.TYPE_MESSAGE_VOICE
 
 class AppViewFactory {
     companion object {
@@ -9,6 +10,13 @@ class AppViewFactory {
             return when (message.type) {
                 TYPE_MESSAGE_IMAGE ->
                     ViewImageMessage(
+                        message.id,
+                        message.from,
+                        message.timeStamp.toString(),
+                        message.fileUrl
+                    )
+                TYPE_MESSAGE_VOICE ->
+                    ViewVoiceMessage(
                         message.id,
                         message.from,
                         message.timeStamp.toString(),
