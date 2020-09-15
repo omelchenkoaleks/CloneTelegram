@@ -1,17 +1,13 @@
 package com.omelchenkoaleks.clonetelegram.ui.fragments.single_chat
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.omelchenkoaleks.clonetelegram.database.CURRENT_UID
 import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.AppHolderFactory
 import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderImageMessage
 import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderTextMessage
 import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderVoiceMessage
 import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views.MessageView
-import com.omelchenkoaleks.clonetelegram.utils.asTime
-import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 
 /*
     Работа адаптера должна заключаться только в том, чтобы принять какой-то массив
@@ -32,58 +28,12 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HolderImageMessage -> drawMessageImage(holder, position)
-            is HolderTextMessage -> drawMessageText(holder, position)
-            is HolderVoiceMessage -> drawMessageVoice(holder, position)
+            is HolderImageMessage -> holder.drawMessageImage(holder, mListMessagesCache[position])
+            is HolderTextMessage -> holder.drawMessageText(holder, mListMessagesCache[position])
+            is HolderVoiceMessage -> holder.drawMessageVoice(holder, mListMessagesCache[position])
             else -> {
 
             }
-        }
-    }
-
-    private fun drawMessageVoice(holder: HolderVoiceMessage, position: Int) {
-        if (mListMessagesCache[position].from == CURRENT_UID) {
-            holder.blockReceivedVoiceMessage.visibility = View.GONE
-            holder.blockUserVoiceMessage.visibility = View.VISIBLE
-            holder.chatUserVoiceMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
-        } else {
-            holder.blockReceivedVoiceMessage.visibility = View.VISIBLE
-            holder.blockUserVoiceMessage.visibility = View.GONE
-            holder.chatReceivedVoiceMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
-        }
-    }
-
-    private fun drawMessageImage(holder: HolderImageMessage, position: Int) {
-        if (mListMessagesCache[position].from == CURRENT_UID) {
-            holder.blockReceivedImageMessage.visibility = View.GONE
-            holder.blockUserImageMessage.visibility = View.VISIBLE
-            holder.chatUserImage.downloadAndSetImage(mListMessagesCache[position].fileUrl)
-            holder.chatUserImageMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
-        } else {
-            holder.blockReceivedImageMessage.visibility = View.VISIBLE
-            holder.blockUserImageMessage.visibility = View.GONE
-            holder.chatReceivedImage.downloadAndSetImage(mListMessagesCache[position].fileUrl)
-            holder.chatReceivedImageMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
-        }
-    }
-
-    private fun drawMessageText(holder: HolderTextMessage, position: Int) {
-        if (mListMessagesCache[position].from == CURRENT_UID) {
-            holder.blockUserMessage.visibility = View.VISIBLE
-            holder.blockReceivedMessage.visibility = View.GONE
-            holder.chatUserMessage.text = mListMessagesCache[position].text
-            holder.chatUserMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
-        } else {
-            holder.blockUserMessage.visibility = View.GONE
-            holder.blockReceivedMessage.visibility = View.VISIBLE
-            holder.chatReceivedMessage.text = mListMessagesCache[position].text
-            holder.chatReceivedMessageTime.text =
-                mListMessagesCache[position].timeStamp.asTime()
         }
     }
 

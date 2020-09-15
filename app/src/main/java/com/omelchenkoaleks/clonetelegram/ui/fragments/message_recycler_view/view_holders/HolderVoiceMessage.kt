@@ -5,6 +5,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.omelchenkoaleks.clonetelegram.database.CURRENT_UID
+import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views.MessageView
+import com.omelchenkoaleks.clonetelegram.utils.asTime
 import kotlinx.android.synthetic.main.message_item_voice.view.*
 
 class HolderVoiceMessage(view: View): RecyclerView.ViewHolder(view) {
@@ -17,4 +20,18 @@ class HolderVoiceMessage(view: View): RecyclerView.ViewHolder(view) {
     val chatReceivedBtnStop: ImageView = view.chat_received_btn_stop
     val chatUserBtnPlay: ImageView = view.chat_user_btn_play
     val chatUserBtnStop: ImageView = view.chat_user_btn_stop
+
+    fun drawMessageVoice(holder: HolderVoiceMessage, view: MessageView) {
+        if (view.from == CURRENT_UID) {
+            holder.blockReceivedVoiceMessage.visibility = View.GONE
+            holder.blockUserVoiceMessage.visibility = View.VISIBLE
+            holder.chatUserVoiceMessageTime.text =
+                view.timeStamp.asTime()
+        } else {
+            holder.blockReceivedVoiceMessage.visibility = View.VISIBLE
+            holder.blockUserVoiceMessage.visibility = View.GONE
+            holder.chatReceivedVoiceMessageTime.text =
+                view.timeStamp.asTime()
+        }
+    }
 }
