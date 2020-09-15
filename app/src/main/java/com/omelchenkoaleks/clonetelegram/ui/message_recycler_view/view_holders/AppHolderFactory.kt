@@ -1,10 +1,10 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders
+package com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.view_holders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views.MessageView
+import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.MessageView
 
 class AppHolderFactory {
     companion object {

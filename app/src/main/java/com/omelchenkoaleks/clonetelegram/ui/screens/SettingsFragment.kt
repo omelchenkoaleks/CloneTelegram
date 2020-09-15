@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.screens
 
 import android.app.Activity
 import android.content.Intent

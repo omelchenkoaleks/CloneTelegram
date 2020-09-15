@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views
+package com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views
 
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.utils.TYPE_MESSAGE_IMAGE

@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.screens
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
-import com.omelchenkoaleks.clonetelegram.ui.fragments.single_chat.SingleChatFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.single_chat.SingleChatFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*

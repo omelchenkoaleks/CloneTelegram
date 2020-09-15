@@ -1,13 +1,10 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments.single_chat
+package com.omelchenkoaleks.clonetelegram.ui.screens.single_chat
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.AppHolderFactory
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderImageMessage
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderTextMessage
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders.HolderVoiceMessage
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views.MessageView
+import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.view_holders.*
+import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.MessageView
 
 /*
     Работа адаптера должна заключаться только в том, чтобы принять какой-то массив
@@ -27,14 +24,7 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HolderImageMessage -> holder.drawMessageImage(holder, mListMessagesCache[position])
-            is HolderTextMessage -> holder.drawMessageText(holder, mListMessagesCache[position])
-            is HolderVoiceMessage -> holder.drawMessageVoice(holder, mListMessagesCache[position])
-            else -> {
-
-            }
-        }
+        (holder as MessageHolder).drawMessage(mListMessagesCache[position])
     }
 
     override fun getItemCount(): Int = mListMessagesCache.size

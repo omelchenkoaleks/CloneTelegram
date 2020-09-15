@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.screens
 
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*

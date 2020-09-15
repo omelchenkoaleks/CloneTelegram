@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments
+package com.omelchenkoaleks.clonetelegram.ui.screens
 
 import androidx.fragment.app.Fragment
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY

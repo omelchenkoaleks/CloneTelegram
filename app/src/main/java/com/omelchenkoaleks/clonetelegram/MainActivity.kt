@@ -9,8 +9,8 @@ import com.omelchenkoaleks.clonetelegram.database.AUTH
 import com.omelchenkoaleks.clonetelegram.database.initFirebase
 import com.omelchenkoaleks.clonetelegram.database.initUser
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
-import com.omelchenkoaleks.clonetelegram.ui.fragments.MainFragment
-import com.omelchenkoaleks.clonetelegram.ui.fragments.register.EnterPhoneNumberFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.MainFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.register.EnterPhoneNumberFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.coroutines.CoroutineScope

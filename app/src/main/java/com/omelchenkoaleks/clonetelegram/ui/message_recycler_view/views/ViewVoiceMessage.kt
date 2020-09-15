@@ -1,14 +1,14 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views
+package com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views
 
-data class ViewTextMessage(
+data class ViewVoiceMessage(
     override val id: String,
     override val from: String,
     override val timeStamp: String,
-    override val fileUrl: String = "",
-    override val text: String
+    override val fileUrl: String,
+    override val text: String = ""
 ) : MessageView {
     override fun getTypeView(): Int {
-        return MessageView.MESSAGE_TEXT
+        return MessageView.MESSAGE_VOICE
     }
 
     override fun equals(other: Any?): Boolean {

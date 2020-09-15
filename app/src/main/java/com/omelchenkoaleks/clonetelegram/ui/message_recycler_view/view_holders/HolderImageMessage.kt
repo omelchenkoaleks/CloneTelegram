@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.view_holders
+package com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.view_holders
 
 import android.view.View
 import android.widget.ImageView
@@ -6,12 +6,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.omelchenkoaleks.clonetelegram.database.CURRENT_UID
-import com.omelchenkoaleks.clonetelegram.ui.fragments.message_recycler_view.views.MessageView
+import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.MessageView
 import com.omelchenkoaleks.clonetelegram.utils.asTime
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 import kotlinx.android.synthetic.main.message_item_image.view.*
 
-class HolderImageMessage(view: View) : RecyclerView.ViewHolder(view) {
+class HolderImageMessage(view: View) : RecyclerView.ViewHolder(view), MessageHolder {
     val blockReceivedImageMessage: ConstraintLayout = view.block_received_image_message
     val blockUserImageMessage: ConstraintLayout = view.block_user_image_message
     val chatUserImage: ImageView = view.chat_user_image
@@ -19,18 +19,18 @@ class HolderImageMessage(view: View) : RecyclerView.ViewHolder(view) {
     val chatUserImageMessageTime: TextView = view.chat_user_image_message_time
     val chatReceivedImageMessageTime: TextView = view.chat_received_image_message_time
 
-    fun drawMessageImage(holder: HolderImageMessage, view: MessageView) {
+    override fun drawMessage(view: MessageView) {
         if (view.from == CURRENT_UID) {
-            holder.blockReceivedImageMessage.visibility = View.GONE
-            holder.blockUserImageMessage.visibility = View.VISIBLE
-            holder.chatUserImage.downloadAndSetImage(view.fileUrl)
-            holder.chatUserImageMessageTime.text =
+            blockReceivedImageMessage.visibility = View.GONE
+            blockUserImageMessage.visibility = View.VISIBLE
+            chatUserImage.downloadAndSetImage(view.fileUrl)
+            chatUserImageMessageTime.text =
                 view.timeStamp.asTime()
         } else {
-            holder.blockReceivedImageMessage.visibility = View.VISIBLE
-            holder.blockUserImageMessage.visibility = View.GONE
-            holder.chatReceivedImage.downloadAndSetImage(view.fileUrl)
-            holder.chatReceivedImageMessageTime.text =
+            blockReceivedImageMessage.visibility = View.VISIBLE
+            blockUserImageMessage.visibility = View.GONE
+            chatReceivedImage.downloadAndSetImage(view.fileUrl)
+            chatReceivedImageMessageTime.text =
                 view.timeStamp.asTime()
         }
     }
