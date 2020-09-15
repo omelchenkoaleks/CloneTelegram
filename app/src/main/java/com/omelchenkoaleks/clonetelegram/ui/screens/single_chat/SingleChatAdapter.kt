@@ -13,7 +13,7 @@ import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.MessageV
 class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var mListMessagesCache = mutableListOf<MessageView>() // returns immutable empty list
-    private lateinit var mDiffResult: DiffUtil.DiffResult
+    private var mListHolders = mutableListOf<MessageHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return AppHolderFactory.getHolder(parent, viewType)
@@ -31,11 +31,13 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         (holder as MessageHolder).onAttach(mListMessagesCache[holder.adapterPosition])
+        mListHolders.add((holder as MessageHolder))
         super.onViewAttachedToWindow(holder)
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         (holder as MessageHolder).onDetach()
+        mListHolders.remove((holder as MessageHolder))
         super.onViewDetachedFromWindow(holder)
     }
 
@@ -60,5 +62,11 @@ class SingleChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             notifyItemInserted(0)
         }
         onSuccess()
+    }
+
+    fun onDestroy() {
+        mListHolders.forEach {
+            it.onDetach()
+        }
     }
 }
