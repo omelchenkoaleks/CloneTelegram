@@ -13,6 +13,7 @@ import com.omelchenkoaleks.clonetelegram.models.UserModel
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.utils.AppValueEventListener
 import com.omelchenkoaleks.clonetelegram.utils.showToast
+import java.io.File
 
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
@@ -154,7 +155,12 @@ fun setNameToDatabase(fullName: String) {
         }.addOnFailureListener { showToast(it.message.toString()) }
 }
 
-fun sendMessageAsFile(receivingUserId: String, fileUrl: String, messageKey: String, typeMessage: String) {
+fun sendMessageAsFile(
+    receivingUserId: String,
+    fileUrl: String,
+    messageKey: String,
+    typeMessage: String
+) {
     val refDialogUser = "$NODE_MESSAGES/$CURRENT_UID/$receivingUserId"
     val refDialogReceivingUser = "$NODE_MESSAGES/$receivingUserId/$CURRENT_UID"
 
@@ -187,4 +193,11 @@ fun uploadFileToStorage(uri: Uri, messageKey: String, receivedId: String, typeMe
             sendMessageAsFile(receivedId, it, messageKey, typeMessage)
         }
     }
+}
+
+fun getFileFromStorage(mFile: File, fileUrl: String, function: () -> Unit) {
+    val path = REF_STORAGE_ROOT.storage.getReferenceFromUrl(fileUrl)
+    path.getFile(mFile)
+        .addOnSuccessListener { function() }
+        .addOnFailureListener { showToast(it.message.toString()) }
 }
