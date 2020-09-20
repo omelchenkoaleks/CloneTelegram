@@ -1,7 +1,8 @@
-package com.omelchenkoaleks.clonetelegram.ui.screens
+package com.omelchenkoaleks.clonetelegram.ui.screens.settings
 
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*
+import com.omelchenkoaleks.clonetelegram.ui.screens.BaseChangeFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*

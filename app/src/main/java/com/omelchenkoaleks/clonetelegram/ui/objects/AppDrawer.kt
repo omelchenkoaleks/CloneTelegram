@@ -17,7 +17,7 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.ui.screens.ContactsFragment
-import com.omelchenkoaleks.clonetelegram.ui.screens.SettingsFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.settings.SettingsFragment
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.database.USER
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
