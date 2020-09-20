@@ -18,6 +18,7 @@ import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.models.UserModel
 import com.omelchenkoaleks.clonetelegram.ui.screens.BaseFragment
 import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.AppViewFactory
+import com.omelchenkoaleks.clonetelegram.ui.screens.main_list.MainListFragment
 import com.omelchenkoaleks.clonetelegram.ui.screens.settings.ChangeNameFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
@@ -267,6 +268,14 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.menu_clear_chat -> clearChat(contact.id) {
+                showToast("Чат очищен")
+                replaceFragment(MainListFragment())
+            }
+            R.id.menu_delete_chat -> deleteChat(contact.id) {
+                showToast("Чат удален")
+                replaceFragment(MainListFragment())
+            }
         }
         return true
     }

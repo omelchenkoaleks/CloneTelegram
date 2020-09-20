@@ -42,21 +42,27 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
             mListItems.forEach { model ->
 
                 // 2 request
-                mRefUsers.child(model.id).addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot1 ->
-                    val newModel = dataSnapshot1.getCommonModel()
+                mRefUsers.child(model.id)
+                    .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot1 ->
+                        val newModel = dataSnapshot1.getCommonModel()
 
-                    // 3 request
-                    mRefMessages.child(model.id).limitToLast(1)
-                        .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot2 ->
-                            val tempList = dataSnapshot2.children.map { it.getCommonModel() }
-                            newModel.lastMessage = tempList[0].text
+                        // 3 request
+                        mRefMessages.child(model.id).limitToLast(1)
+                            .addListenerForSingleValueEvent(AppValueEventListener { dataSnapshot2 ->
+                                val tempList = dataSnapshot2.children.map { it.getCommonModel() }
 
-                            if (newModel.fullName.isEmpty()) {
-                                newModel.fullName = newModel.phone
-                            }
-                            mAdapter.updateListItems(newModel)
-                        })
-                })
+                                if (tempList.isEmpty()) {
+                                    newModel.lastMessage = "Чат очищен"
+                                } else {
+                                    newModel.lastMessage = tempList[0].text
+                                }
+
+                                if (newModel.fullName.isEmpty()) {
+                                    newModel.fullName = newModel.phone
+                                }
+                                mAdapter.updateListItems(newModel)
+                            })
+                    })
             }
         })
 
