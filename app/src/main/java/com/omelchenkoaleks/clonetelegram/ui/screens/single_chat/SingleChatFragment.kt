@@ -199,6 +199,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         mRefUser = REF_DATABASE_ROOT.child(NODE_USERS).child(contact.id)
         mRefUser.addValueEventListener(mListenerInfoToolbar)
+
         chat_btn_send_message.setOnClickListener {
             mSmoothScrollToPosition = true
             val message = chat_input_message.text.toString()
@@ -206,11 +207,15 @@ class SingleChatFragment(private val contact: CommonModel) :
                 showToast("Введите сообщение")
             } else {
                 sendMessage(message, contact.id, TYPE_TEXT) {
+
+                    saveToMainList(contact.id, TYPE_CHAT)
+
                     chat_input_message.setText("") // Очистим нашу строку после отправления сообщения.
                 }
             }
         }
     }
+
 
     private fun initInfoToolbar() {
         if (mReceivingUser.fullName.isEmpty()) {
