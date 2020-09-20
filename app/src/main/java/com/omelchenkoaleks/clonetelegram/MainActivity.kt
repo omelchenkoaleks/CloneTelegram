@@ -9,7 +9,7 @@ import com.omelchenkoaleks.clonetelegram.database.AUTH
 import com.omelchenkoaleks.clonetelegram.database.initFirebase
 import com.omelchenkoaleks.clonetelegram.database.initUser
 import com.omelchenkoaleks.clonetelegram.databinding.ActivityMainBinding
-import com.omelchenkoaleks.clonetelegram.ui.screens.MainFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.main_list.MainListFragment
 import com.omelchenkoaleks.clonetelegram.ui.screens.register.EnterPhoneNumberFragment
 import com.omelchenkoaleks.clonetelegram.ui.objects.AppDrawer
 import com.omelchenkoaleks.clonetelegram.utils.*
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) { // Если авторизован, то заходим
             mAppDrawer.create()
-            replaceFragment(MainFragment(), false)
+            replaceFragment(MainListFragment(), false)
         } else {
             replaceFragment(EnterPhoneNumberFragment(), false)
         }
