@@ -1,7 +1,6 @@
 package com.omelchenkoaleks.clonetelegram.ui.screens.single_chat
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.view.*
@@ -16,10 +15,9 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.models.UserModel
-import com.omelchenkoaleks.clonetelegram.ui.screens.BaseFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.base.BaseFragment
 import com.omelchenkoaleks.clonetelegram.ui.message_recycler_view.views.AppViewFactory
 import com.omelchenkoaleks.clonetelegram.ui.screens.main_list.MainListFragment
-import com.omelchenkoaleks.clonetelegram.ui.screens.settings.ChangeNameFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.android.synthetic.main.activity_main.view.*

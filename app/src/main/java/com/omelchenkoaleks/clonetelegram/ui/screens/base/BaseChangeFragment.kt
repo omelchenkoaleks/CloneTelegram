@@ -1,4 +1,4 @@
-package com.omelchenkoaleks.clonetelegram.ui.screens
+package com.omelchenkoaleks.clonetelegram.ui.screens.base
 
 import android.view.Menu
 import android.view.MenuInflater

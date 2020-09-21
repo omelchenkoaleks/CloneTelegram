@@ -16,10 +16,12 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader
 import com.mikepenz.materialdrawer.util.DrawerImageLoader
 import com.omelchenkoaleks.clonetelegram.R
-import com.omelchenkoaleks.clonetelegram.ui.screens.ContactsFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.contacts.ContactsFragment
 import com.omelchenkoaleks.clonetelegram.ui.screens.settings.SettingsFragment
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.database.USER
+import com.omelchenkoaleks.clonetelegram.ui.screens.groups.AddContactsAdapter
+import com.omelchenkoaleks.clonetelegram.ui.screens.groups.AddContactsFragment
 import com.omelchenkoaleks.clonetelegram.utils.downloadAndSetImage
 import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 
@@ -128,6 +130,7 @@ class AppDrawer {
 
     private fun clickToItem(position: Int) {
         when (position) {
+            1 -> replaceFragment(AddContactsFragment())
             7 -> replaceFragment(SettingsFragment())
             4 -> replaceFragment(ContactsFragment())
         }

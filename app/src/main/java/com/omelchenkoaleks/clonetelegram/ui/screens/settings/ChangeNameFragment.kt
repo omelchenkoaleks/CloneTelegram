@@ -3,7 +3,7 @@ package com.omelchenkoaleks.clonetelegram.ui.screens.settings
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.USER
 import com.omelchenkoaleks.clonetelegram.database.setNameToDatabase
-import com.omelchenkoaleks.clonetelegram.ui.screens.BaseChangeFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.base.BaseChangeFragment
 import com.omelchenkoaleks.clonetelegram.utils.showToast
 import kotlinx.android.synthetic.main.fragment_change_name.*
 

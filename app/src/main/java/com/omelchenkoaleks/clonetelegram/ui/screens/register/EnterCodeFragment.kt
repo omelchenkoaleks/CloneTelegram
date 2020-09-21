@@ -3,7 +3,7 @@ package com.omelchenkoaleks.clonetelegram.ui.screens.register
 import com.google.firebase.auth.PhoneAuthProvider
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*
-import com.omelchenkoaleks.clonetelegram.ui.screens.BaseFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.base.BaseFragment
 import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_enter_code.*
 
