@@ -1,14 +1,11 @@
 package com.omelchenkoaleks.clonetelegram.ui.screens.groups
 
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.database.*
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
-import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
-import com.omelchenkoaleks.clonetelegram.utils.AppValueEventListener
-import com.omelchenkoaleks.clonetelegram.utils.hideKeyboard
-import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
+import com.omelchenkoaleks.clonetelegram.ui.screens.base.BaseFragment
+import com.omelchenkoaleks.clonetelegram.utils.*
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
 /*
@@ -16,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_add_contacts.*
     ChatsFragment - т.к. он основной фрагмент, он не наследуется от базового фрагмента. Он должен
     вести свою жизнь и не должен вести точно также, как другие фрагменты.
  */
-class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
+class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
@@ -26,13 +23,14 @@ class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
     private var mListItems = listOf<CommonModel>()
 
     override fun onResume() {
+        listContacts.clear()
         super.onResume()
         APP_ACTIVITY.title = "Добавить участника"
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            replaceFragment(CreateGroupFragment(listContacts))
+            if (listContacts.isEmpty()) showToast("Добавьте участника")
+            else replaceFragment(CreateGroupFragment(listContacts))
         }
     }
 
