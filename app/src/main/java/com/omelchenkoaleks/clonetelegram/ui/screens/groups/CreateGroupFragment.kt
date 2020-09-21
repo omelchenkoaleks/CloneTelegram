@@ -5,6 +5,7 @@ import com.omelchenkoaleks.clonetelegram.R
 import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.ui.screens.base.BaseFragment
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
+import com.omelchenkoaleks.clonetelegram.utils.getPlurals
 import com.omelchenkoaleks.clonetelegram.utils.hideKeyboard
 import com.omelchenkoaleks.clonetelegram.utils.showToast
 import kotlinx.android.synthetic.main.fragment_create_group.*
@@ -23,6 +24,7 @@ class CreateGroupFragment(private var listContacts: List<CommonModel>) :
             showToast("Click")
         }
         create_group_input_name.requestFocus()
+        create_group_counts.text = getPlurals(listContacts.size)
     }
 
     private fun initRecyclerView() {
