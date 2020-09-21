@@ -1,6 +1,5 @@
 package com.omelchenkoaleks.clonetelegram.ui.screens.groups
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.omelchenkoaleks.clonetelegram.R
@@ -9,6 +8,7 @@ import com.omelchenkoaleks.clonetelegram.models.CommonModel
 import com.omelchenkoaleks.clonetelegram.utils.APP_ACTIVITY
 import com.omelchenkoaleks.clonetelegram.utils.AppValueEventListener
 import com.omelchenkoaleks.clonetelegram.utils.hideKeyboard
+import com.omelchenkoaleks.clonetelegram.utils.replaceFragment
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 
 /*
@@ -32,9 +32,7 @@ class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            listContacts.forEach {
-                Log.d("GOOD", it.id)
-            }
+            replaceFragment(CreateGroupFragment(listContacts))
         }
     }
 
